@@ -1,0 +1,1700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://youking-lib.github.io</id>
+    <title>Youking</title>
+    <updated>2025-01-07T11:30:11.124Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://youking-lib.github.io"/>
+    <link rel="self" href="https://youking-lib.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://youking-lib.github.io/images/avatar.png</logo>
+    <icon>https://youking-lib.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2025, Youking</rights>
+    <entry>
+        <title type="html"><![CDATA[独立开发技术栈  2024 年度总结]]></title>
+        <id>https://youking-lib.github.io/post/useful-technology-stack-snippet/</id>
+        <link href="https://youking-lib.github.io/post/useful-technology-stack-snippet/">
+        </link>
+        <updated>2024-12-27T06:41:17.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>你有没有那么一天突然灵光一现，脑海里出现一个非常有意思的 Idea，并且想要将它实现出来；</p>
+<p>然后你满怀激情的筹备时，却发现这个过程并不顺利。首当其冲的就是手头没有趁手的工具，或是<br>
+花费大量时间学习新工具，却遇到各种各样的难点和坑点；</p>
+<p>于是这个 Idea 就被搁置，像是掩埋在尘埃里的一颗种子...</p>
+<p>以上是笔者曾经 “无数次成为独立开发者” 的心路历程，因此本文记录一下迈过这个阶段之后的总结与沉淀。</p>
+<h2 id="如何选择适合自己的技术栈">如何选择适合自己的技术栈？</h2>
+<p>参考以下几个角度：</p>
+<ul>
+<li>技术选型的目的或原则是降本提效，脱离这个原则的选型都是不负责任的；</li>
+<li>从自身角度选择自己最熟悉的技术栈，减少学习成本、时间成本，聚焦于快速实现产品功能；</li>
+<li>从社区角度选取成熟稳定的产品服务，选择成本较低的方案；</li>
+</ul>
+<p>时间和钱是最大的成本，以下是几个反例：</p>
+<ul>
+<li>产品还没发布上线，已经重构了好几遍；</li>
+<li>还没实现功能，先买了一堆域名；</li>
+<li>产品没有几个用户已经考虑优化极致的网络体验；</li>
+</ul>
+<p>笔者也是踩了很多坑才总结出一套当下自己趁手的工具，后续也会持续更新，毕竟这只是当下的教训反思，看似完美的工具罢了 🤡。</p>
+<h2 id="整体方案">整体方案</h2>
+<p>前端</p>
+<ul>
+<li>框架：<a href="https://react.dev/">React</a></li>
+<li>打包编译：<a href="https://nextjs.org/docs">Nextjs</a>、<a href="https://tsup.egoist.dev/#install">tsup</a></li>
+<li>包管理：<a href="https://pnpm.io/installation">pnpm</a>、<a href="https://turbo.build/repo/docs">turbo</a></li>
+<li>UI： <a href="https://www.radix-ui.com/themes/docs/overview/getting-started">@radix-ui</a>、<a href="https://tailwindcss.com/docs/installation">tailwind</a>、<a href="https://ui.shadcn.com/">shacn-ui</a></li>
+<li>状态管理：<a href="https://immerjs.github.io/immer/zh-CN/example-setstate">use-immer</a></li>
+</ul>
+<p>后端：</p>
+<ul>
+<li>框架：<a href="https://hono.dev/docs/getting-started/basic">Honojs</a>、<a href="https://nextjs.org/docs">Nextjs</a></li>
+<li>OpenAPI：@hono/zod-openapi、@hono/swagger-ui、swagger-typescript-api（TS 接口文件生成），<a href="https://youking-lib.github.io/post/honojs-zod-openapi/">查看方案 OpenAPI 实现方案</a></li>
+<li>数据库：<a href="https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma">Prisma</a>、<a href="https://developers.cloudflare.com/d1/">Cloudflare D1</a></li>
+<li>邮件
+<ul>
+<li>国外：<a href="https://www.useplunk.com/">Plunk（开源）</a>、<a href="https://resend.com/">Resend</a></li>
+<li>国内：飞书邮件 + <a href="https://www.nodemailer.com/">nodemailer</a> + <a href="https://react.email/docs/introduction">react-email（邮件模版）</a></li>
+</ul>
+</li>
+<li>统计：<a href="https://umami.is/">umami（开源）</a>、<a href="https://marketingplatform.google.com/about/analytics/">Google Analytics</a></li>
+<li>鉴权：<a href="https://clerk.com/">Clerk SAAS</a>、<a href="https://www.npmjs.com/package/jose">jose JWT</a></li>
+</ul>
+<p>AI：</p>
+<ul>
+<li>SDK：<a href="https://sdk.vercel.ai/docs/introduction">Vercel AI SDK</a></li>
+<li>Provider：<a href="https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/#pricing">Azure OpenAI</a>、<a href="https://developers.cloudflare.com/workers-ai/">Cloudflare AI</a>、<a href="https://help.aliyun.com/zh/model-studio/getting-started/what-is-model-studio?spm=5176.29619931.J_AHgvE-XDhTWrtotIBlDQQ.13.7efa59fceyn3Vq#1a407ae2caj33">Ali 通义（国内）</a></li>
+<li>Vector DB：<a href="https://developers.cloudflare.com/vectorize/">Cloudlfare Vector</a>、<a href="https://milvus.io/docs/architecture_overview.md">Milvus</a></li>
+</ul>
+<p>运维：</p>
+<ul>
+<li>部署：<a href="https://developers.cloudflare.com/pages/">Cloudlare Worker/Pages</a>、<a href="https://pm2.keymetrics.io/docs/usage/quick-start/">PM2</a>、<a href="https://docs.docker.com/engine/install/">Docker</a></li>
+<li>HTTPS：<a href="https://caddyserver.com/docs/install">Caddy</a></li>
+<li>域名 DNS：<a href="https://www.cloudflare.com/">Cloudlfare</a></li>
+</ul>
+<blockquote>
+<p>基于成本考量，服务部署首选 Cloudflare Worker，如受限于技术问题 Worker 无法支持，可以选择一个低成本的服务器，用于部署 PM2、Docker 等服务</p>
+</blockquote>
+<p>Docker 服务，参考 <a href="https://youking-lib.github.io/post/usefull-docker-compose-configs/">使用 Docker Compose 快速部署常用的服务</a></p>
+<ul>
+<li>[SAAS] Dify https://dify.ai/</li>
+<li>[SAAS] Umami https://umami.is/</li>
+<li>[SAAS] Flowise AI https://flowiseai.com/</li>
+<li>[SAAS] Firecrawl 爬虫  https://www.firecrawl.dev/</li>
+<li>[数据库] Mysql</li>
+<li>[数据库] MongoDB</li>
+<li>[数据库] Milvus</li>
+<li>[数据库] Neo4j</li>
+<li>[中间件] Kafka</li>
+</ul>
+<p>Common Package：</p>
+<ul>
+<li><a href="https://zod.dev/">zodjs</a>：数据校验、TS 类型推导；</li>
+<li><a href="https://tsx.is/">tsx</a>：直接运行 ts/tsx 文件，快速 debug；</li>
+<li><a href="https://vitest.dev/">vitest</a>：单元测试框架 jest 的完美替代 ，再也不用关心 ES 模块与 TS 编译问题；</li>
+<li><a href="https://github.com/ai/nanoid">nanoid</a>：UUID 生成；</li>
+</ul>
+<h2 id="前端">前端</h2>
+<h3 id="基于-trubo-pnpm-nextjs-tsup-的多包方案">基于 trubo、pnpm、nextjs、tsup 的多包方案</h3>
+<p>一整年下来，最趁手的就是该多包方案：</p>
+<ul>
+<li>使用 <a href="https://turbo.build/repo/docs">turbo</a> 自动的进行依赖任务构建；</li>
+<li>使用 <a href="https://pnpm.io/installation">pnpm</a> 快速高效的链接多个 Pakcage；</li>
+<li>使用 <a href="https://nextjs.org/docs">Nextjs</a> 提升全方面提升 React 开发体验，并提供轻量级的 API 服务；</li>
+<li>使用 <a href="https://tsup.egoist.dev/#install">tsup</a> 处理特殊场景的打包构建，如构建符合 commonjs 规范的包（Package）、打包文件（Bundle File）；</li>
+</ul>
+<p>参考 <a href="https://youking-lib.github.io/post/turbo-monorepo-buffet/">基于 trubo、pnpm、nextjs、tsup 的 monorepo 放题</a> 深入了解。</p>
+<h3 id="ui-库的最佳实践">UI 库的最佳实践</h3>
+<p>UI 库的选型优先选择自己最熟悉擅长的轮子，如果想想要尝鲜或突破，可参考以下选型：</p>
+<ul>
+<li>首选 <a href="https://www.radix-ui.com/themes/docs/overview/getting-started">@radix-ui</a> 不需要额外配置，安装包后直接使用；</li>
+<li>对于较为复杂的排版场景、AI 生成的代码模版，使用 <a href="https://tailwindcss.com/docs/installation">tailwind</a>；</li>
+<li>@radix-ui 提供的组件并不算丰富，还可以选择 <a href="https://ui.shadcn.com/">shacn-ui</a>、<a href="https://www.chakra-ui.com/">chakraui</a> 等</li>
+</ul>
+<p>绝大部分场景可以直接使用 @radix-ui 组件提供的 props 进行排版：</p>
+<pre><code class="language-typescript">function RadixUI() {
+    return (
+        &lt;Flex mt=&quot;2&quot;&gt;&lt;Flex&gt;
+    )
+}
+
+function TailwindUI() {
+    return (
+        &lt;div className=&quot;flex mt-2&quot;&gt;&lt;/div&gt;
+    )
+}
+</code></pre>
+<p>参考：</p>
+<ul>
+<li><a href="https://github.com/radix-ui/themes/issues/109#issuecomment-1747345743">@radix-ui 与 tailwind 组合使用</a></li>
+</ul>
+<h3 id="史上最简单高效的状态管理">史上最简单高效的状态管理</h3>
+<p>在 Nextjs 环境中，完全脱离状态管理库（SWR、Server Action 等方案）又不是很方便，而引入 zustand、redux 等库又太重。</p>
+<p>使用 user-immer 渐进式的解决简单组件内部状态管理、复杂的业务组件状态管理，甚至是整个应用的状态管理，优势如下：</p>
+<ul>
+<li>[接近原生 JS 的开发体验] 使用接近 js 原生对象的风格操作不可变数据，引入的概念少；</li>
+<li>[与 React 无缝结合] 与 react 结合，状态变更可预测，调试友好，diff 变更时不会造成心智负担；</li>
+<li>[灵活拓展] 按需拓展场景，如 Selector、Mutation 等，状态流转白盒化；</li>
+</ul>
+<p>体验示例如下，可以参考 <a href="https://youking-lib.github.io/post/use-immer-state-manager/">史上最简单高效的状态管理<br>
+</a> 了解更多：</p>
+<pre><code class="language-typescript">function Lists() {
+    const posts = useSelector(getPosts);
+    const dispatch = useDispatch();
+
+    useEffect(() =&gt; {
+        getAllPosts().then(posts =&gt; {
+            dispatch(draft =&gt; setPosts(draft, posts))
+        })
+    }, [])
+}
+</code></pre>
+<h2 id="后端">后端</h2>
+<h3 id="构建类型安全的-api-接口-openapi-自动成-ts-接口文件">构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件</h3>
+<ol>
+<li>方案</li>
+</ol>
+<ul>
+<li><a href="https://hono.dev/docs/getting-started/basic">Honojs</a> 轻量服务框架，支持运行在各种平台，如 Cloudflare Worker、Vercel，支持集成到 Nextjs；</li>
+<li><a href="https://hono.dev/examples/zod-openapi">@hono/zod-openapi</a> 基于 Zodjs 定义 Swagger 接口</li>
+<li><a href="https://hono.dev/examples/swagger-ui">@hono/swagger-ui</a> 生成 Swagger 接口文档</li>
+<li><a href="https://github.com/acacode/swagger-typescript-api">swagger-typescript-api</a> 生成 ts 接口文件</li>
+</ul>
+<ol start="2">
+<li>优势</li>
+</ol>
+<ul>
+<li>输出规范的 Swagger 接口文档，支持代码生成；</li>
+<li>基于 zodjs 生成的 schema，自动的数据校验与类型推导；</li>
+<li>基于轻量级的 Honojs 框架，相同的代码支持在所有平台运行；</li>
+</ul>
+<p>参考 <a href="https://youking-lib.github.io/post/honojs-zod-openapi/">构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件</a> 了解具体实现</p>
+<h3 id="orm-为什么选择-prisma">ORM 为什么选择 Prisma？</h3>
+<p>prisma 的优势如下：</p>
+<ol>
+<li>基于面向对象的查询接口，灵活且流畅，TS 类型推导非常严谨安全；</li>
+<li>支持多种数据库，如 MySQL、PostgreSQL、CloudFlare D1、MongoDB 等，完美适应不同团队、项目的选型偏好，即使你没有 SQL 语法的使用经验；</li>
+<li>清晰的数据模型定义 DSL、完整的迁移同步工具、丰富的文档与强大的社区；</li>
+<li>支持 Cloudflare D1！</li>
+</ol>
+<p>以下是 Prisma 的使用场景，感受一下 Prisma 的便捷性：</p>
+<ol>
+<li>关联数据创建场景：初始化项目以及项目的管理员</li>
+</ol>
+<pre><code class="language-typescript">const project = await prisma.project.create({
+    data: {
+        title: 'default project',
+        owner: {
+            create: {
+                username: '管理员'
+            }
+        }
+    }
+})
+</code></pre>
+<ol start="2">
+<li>关联查询场景：查询项目详情并关联出管理员信息</li>
+</ol>
+<pre><code class="language-typescript">// 关联查询
+function getProject(id: string) {
+    return prisma.project.findUnique({
+        where: {
+            id
+        },
+        include: {
+            owner: true,
+        }
+    })
+}
+</code></pre>
+<p>Prisma 还支持 Cloudflare D1 以及 自动生成 zodjs 文件，参考这篇文章 <a href="https://youking-lib.github.io/post/prisma-guide/">ORM 为什么选择 Prismajs</a></p>
+<h3 id="零成本定制邮件模块">零成本定制邮件模块</h3>
+<p>有两种常用邮件发送的方式：</p>
+<ol>
+<li>域名解析到邮件 Saas 服务，如 <a href="https://resend.com/">Resend</a>、<a href="https://www.useplunk.com/">Plunk</a> 等，推荐 Plunk，开源且支持独立部署；</li>
+<li>SMTP + nodemailer</li>
+</ol>
+<p>笔者使用的是方式二，因为已经将邮件托管到了飞书，选择自己写了一个独立的邮件 OpenAPI 服务，参考 <a href="https://youking-lib.github.io/post/send-email/">结合 react-email 零成本定制邮件系统</a></p>
+<h3 id="ai-比-langchainjs-更好用的-ai-sdk">[AI] 比 langchainjs 更好用的 AI SDK</h3>
+<p>如果深入用过的 langchainjs 的话，你肯定也会骂它很多遍，很多包不面向源代码编程，是跑不起来的，因此只适合参考实现逻辑；</p>
+<p>体验最好的是 Vercel 家的 <a href="https://sdk.vercel.ai/docs/introduction">SDK</a>，优势如下：</p>
+<ul>
+<li>支持不同的模型提供商，如 Azure、Cloudflare 等；</li>
+<li>使用 zodjs 约定模型输入输出的数据模型，完善的类型推导；</li>
+<li>完善的流式传输支持</li>
+</ul>
+<p>配置 Nextjs 实现大模型的调用、Function Call 功能以及流式传输，只需要几行代码：</p>
+<pre><code class="language-typescript">// nextjs api/chat/route.ts
+export async function POST() {
+    cosnt res = await streamText({
+        model,
+        prompt: '提醒我明天上午上班',
+        tools: {
+            createTool
+        }
+    })
+
+    return res.toDataStreamResponse();
+}
+</code></pre>
+<p>更多请参考这篇文章 <a href="https://youking-lib.github.io/post/ai-sdk-guide/">比 langchainjs 更好用的 AI SDK</a></p>
+<h2 id="运维">运维</h2>
+<h3 id="caddy-轻松代替-nginx">Caddy - 轻松代替 Nginx</h3>
+<p>Caddy 的优势体现在：</p>
+<ul>
+<li>安装使用非常简单，配置文件简洁易读</li>
+<li>自动 HTTPS，证书自动更新</li>
+</ul>
+<p>HTTPS 证书的自动化是最省心的功能，安装 Caddy 之后，你只需要作如下的配置，就可以实现 HTTPS 无忧了：</p>
+<pre><code class="language-yml"># Caddyfile
+app.domain.com {
+        reverse_proxy :3000 {
+                header_up Host {host} # redundant
+        }
+}
+</code></pre>
+<p>详细用法参考这篇文章：<a href="https://youking-lib.github.io/post/caddy-guide/">使用 Caddy 轻松代替 Nginx，实现 HTTPS 自动续杯！</a></p>
+<h3 id="使用-docker-compose-快速部署常用的服务">使用 Docker Compose 快速部署常用的服务</h3>
+<p>虽然 Cloudflare 已经提供了大部分免费服务，但仍有一些业务无法支持，比如想要部署一个 mysql 服务、独立部署一套开源的 SAAS 服务</p>
+<p>详细请参考这篇文章：<a href="https://youking-lib.github.io/post/usefull-docker-compose-configs/">使用 Docker Compose 快速部署常用的服务</a> 安装如下你可能会用到的容器服务：</p>
+<ul>
+<li>[SAAS] Dify https://dify.ai/</li>
+<li>[SAAS] Umami https://umami.is/</li>
+<li>[SAAS] Flowise AI https://flowiseai.com/</li>
+<li>[SAAS] Firecrawl 爬虫  https://www.firecrawl.dev/</li>
+<li>[数据库] Mysql</li>
+<li>[数据库] MongoDB</li>
+<li>[数据库] Milvus</li>
+<li>[数据库] Neo4j</li>
+<li>[中间件] Kafka</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[史上最简单高效的状态管理]]></title>
+        <id>https://youking-lib.github.io/post/use-immer-state-manager/</id>
+        <link href="https://youking-lib.github.io/post/use-immer-state-manager/">
+        </link>
+        <updated>2024-12-27T02:46:41.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="场景">场景</h2>
+<ol>
+<li>简单组件的内部状态管理</li>
+<li>复杂的业务组件状态管理</li>
+<li>整个应用的状态管理</li>
+</ol>
+<h2 id="优势">优势</h2>
+<p>使用 use-immer 管理状态的优势：</p>
+<ul>
+<li>[接近原生 JS 的开发体验] 使用接近 js 原生对象的风格操作不可变数据，引入的概念少；</li>
+<li>[与 React 无缝结合] 与 react 结合，状态变更可预测，调试友好，diff 变更时无心智负担；</li>
+<li>[灵活拓展] 按需拓展场景，如 Selector、Mutation 等，状态流转白盒化；</li>
+</ul>
+<h3 id="1-接近原生-js-的开发体验">1 接近原生 JS 的开发体验</h3>
+<ol>
+<li>相对于 zustand、redux 等，引入的概念少，API 设计简单</li>
+</ol>
+<pre><code class="language-typescript">function List() {
+    const [state, dispatch] = useImmer({
+        loading: true,
+        posts: []
+    })
+
+    useEffect(() =&gt; {
+        getAllPosts().then(posts =&gt; {
+            dispatch(draft =&gt; {
+                draft.loading = false;
+                draft.posts = posts;
+            })
+        })
+    }, [])
+}
+</code></pre>
+<ol start="2">
+<li>ts 的 class 可以作为类型使用，immer 结合 class 定义状态，结构清晰、类型友好：</li>
+</ol>
+<pre><code class="language-typescript">export class State {
+  [immerable] = true;
+
+  loading = true;
+  posts: Post[] = [];
+}
+
+function List() {
+    const [state, dispatch] = useImmer(() =&gt; new State());
+}
+</code></pre>
+<h3 id="2-与-react-无缝结合">2 与 React 无缝结合</h3>
+<ol>
+<li>上述的代码片段已经展示了使用 user-immer 管理组件的内部状态，简单方便；</li>
+<li>通过 React Context 在组件树中传递组件状态</li>
+</ol>
+<pre><code class="language-typescript">// 1. 创建 Context Ref
+const ModelContext = createContext&lt;{ state: State, dispatch }&gt;();
+
+// 2. 提供 State
+function Root() {
+    const [state, dispatch] = useImmer(() =&gt; new State());
+
+    return (
+        &lt;ModelContext.Provider value={{ state, dispatch }}&gt;
+            {children}
+        &lt;/StateRefContext.Provider&gt;
+    )
+}
+
+// 3. 定义 hooks
+export const useModel = () =&gt; useContext(ModelContext);
+
+// 4. 子组件访问
+function List() {
+    const model = useModel();
+
+    // model.state.loading
+}
+</code></pre>
+<ol start="3">
+<li>基于 immer 的不可变数据，diff 无心智负担</li>
+</ol>
+<pre><code class="language-typescript">function List() {
+    const model = useModel();
+
+    useEffect(() =&gt; {
+        // posts 发生变化
+    }, [model.state.posts])
+}
+</code></pre>
+<h3 id="3-灵活拓展使用场景">3 灵活拓展使用场景</h3>
+<ol>
+<li>纯函数风格的 Selector，Mutation</li>
+</ol>
+<pre><code class="language-typescript">import { immerable, produce } from 'immer';
+
+// 1. 定义状态
+export class State {
+  [immerable] = true;
+
+  loading = true;
+  posts: Post[] = [];
+
+  static set(state: State, recipe: (draft: State) =&gt; void) {
+    return produce(state, recipe);
+  }
+}
+
+// 2. 定义 Selector、Mutation
+const getPosts = (state: State) =&gt; model.posts
+const setPosts = (draft: State, posts: State['posts']) =&gt; {
+    draft.posts = posts
+}
+</code></pre>
+<ol start="2">
+<li>缓存 Selector 结果，避免不必要的渲染，提升性能</li>
+</ol>
+<pre><code class="language-typescript">// 3. 定义 useSelector 缓存结果，避免不
+function useSelector&lt;T&gt;(
+  selector: (state: State) =&gt; T,
+  deps: DependencyList = []
+): T {
+  const model = useModel();
+  const state = useModelState();
+
+  return useMemo(() =&gt; selector(state), [state, selector, ...deps]);
+}
+
+function Lists() {
+    const posts = useSelector(getPosts);
+}
+</code></pre>
+<ol start="3">
+<li>子组件驱动数据更新，满足复杂的业务场景</li>
+</ol>
+<pre><code class="language-typescript">function useDispatch() {
+    const model = useModel();
+    return useMemo(() =&gt; model.dispatch, [model.dispatch]);
+}
+
+function Lists() {
+    const posts = useSelector(getPosts);
+    const dispatch = useDispatch();
+
+    useEffect(() =&gt; {
+        getAllPosts().then(posts =&gt; {
+            dispatch(draft =&gt; setPosts(draft, posts))
+        })
+    }, [])
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件]]></title>
+        <id>https://youking-lib.github.io/post/honojs-zod-openapi/</id>
+        <link href="https://youking-lib.github.io/post/honojs-zod-openapi/">
+        </link>
+        <updated>2024-12-26T14:08:37.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="方案">方案</h2>
+<ul>
+<li><a href="https://hono.dev/docs/getting-started/basic">Honojs</a> 轻量服务框架，支持运行在各种平台，如 Cloudflare Worker、Vercel，支持继承到 Nextjs；</li>
+<li><a href="https://hono.dev/examples/zod-openapi">@hono/zod-openapi</a> 基于 Zodjs 定义 Swagger 接口</li>
+<li><a href="https://hono.dev/examples/swagger-ui">@hono/swagger-ui</a> 生成 Swagger 接口文档</li>
+<li>使用 <a href="https://github.com/acacode/swagger-typescript-api">swagger-typescript-api</a> 生成 ts 接口文件</li>
+</ul>
+<h2 id="优势">优势</h2>
+<ul>
+<li>输出规范的 Swagger 接口文档，支持代码生成；</li>
+<li>基于 zodjs 生成的 schema，自动的数据校验与类型推导；</li>
+<li>基于轻量级的 Honojs 框架，相同的代码支持在所有平台运行；</li>
+</ul>
+<h4 id="实现">实现</h4>
+<ol>
+<li>使用 zod-openapi 定义一个 OpenAPI 路由</li>
+</ol>
+<pre><code class="language-typescript">// route.schema.ts
+export const ShopProfile = z.object({
+  id: z.string(),
+  shop: z.string(),
+  title: z.string()
+}).openapi('ShopProfileVo', {
+  description: '商店详情'
+});
+
+export const GetShopProfileRoute = createRoute({
+  tags: ['Shop'],
+  method: 'get',
+  path: '/shop/{shopId}',
+  request: {
+    params: z.object({
+      shopId: z.string()
+    })
+  },
+  responses: {
+    200: {
+      content: {
+        'application/json': {
+          schema: ShopProfile
+        }
+      },
+      description: 'GetShopProfileRoute'
+    }
+  }
+});
+</code></pre>
+<ol start="2">
+<li>根据路由 Schema 实现路由</li>
+</ol>
+<pre><code class="language-typescript">import { OpenAPIHono } from '@hono/zod-openapi'
+import { GetShopProfileRoute } from './route.schema.ts'
+
+const api = new OpenAPIHono();
+
+api.openapi(GetShopProfileRoute, async c =&gt; {
+    const { shopId } = c.valid('params');
+
+    const shopProfile = await prisma.ShopProfile.findUnique({
+        where: {
+            id: shopId
+        }
+    })
+
+    return c.json(shopProfile, 200)
+})
+</code></pre>
+<ol start="3">
+<li>生成 Swagger 文件</li>
+</ol>
+<pre><code class="language-typescript">api.doc('/swagger/doc', (c) =&gt; {
+    return {
+        openapi: '3.1.0',
+        servers: [
+            {
+                url: new URL(c.req.url).origin,
+                description: 'Current environment',
+            },
+        ],
+        info: {
+            version: '0.0.1',
+            title: 'asp-api',
+            description: 'asp-api swagger',
+        },
+    }
+})
+</code></pre>
+<ol start="4">
+<li>[可选] 使用 swagger-ui 渲染接口文档</li>
+</ol>
+<pre><code class="language-typescript">
+api.get('/swagger/ui', swaggerUI({
+    url: '/api/swagger/doc',
+    persistAuthorization: true
+}))
+</code></pre>
+<ol start="5">
+<li>使用 <a href="https://github.com/acacode/swagger-typescript-api">swagger-typescript-api</a> 生成 ts 接口文件</li>
+</ol>
+<pre><code class="language-typescript">// generate.ts
+// tsx ./generate.ts
+import { generateApi } from 'swagger-typescript-api'
+
+gen();
+
+async function gen() {
+    await generateApi({
+        name: 'index.ts',
+        output: path.resolve(__dirname, 'gen', './api'),
+        url: 'http://127.0.0.1:3010/api/swagger/doc',
+    })
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ORM 为什么选择 Prismajs]]></title>
+        <id>https://youking-lib.github.io/post/prisma-guide/</id>
+        <link href="https://youking-lib.github.io/post/prisma-guide/">
+        </link>
+        <updated>2024-12-26T13:53:24.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="优势">优势</h2>
+<ol>
+<li>基于面向对象的查询接口，灵活且流畅，TS 类型推导非常严谨安全；</li>
+<li>支持多种数据库，如 MySQL、PostgreSQL、CloudFlare D1、MongoDB 等，完美适应不同团队、项目的选型偏好，即使你没有 SQL 语法的使用经验；</li>
+<li>清晰的数据模型定义 DSL、完整的迁移同步工具、丰富的文档与强大的社区；</li>
+<li>支持 Cloudflare D1！</li>
+</ol>
+<h4 id="与-dirzzle-的对比">与 dirzzle 的对比</h4>
+<table>
+<thead>
+<tr>
+<th>比较项目</th>
+<th>Prisma</th>
+<th>Drizzle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>定义方式</strong></td>
+<td>- 使用 Prisma Schema（<code>.prisma</code>文件）来定义数据模型，通过类似于 DSL（领域特定语言）的语法定义表、列、关系等。例如，可以直观地定义<code>model User { id Int @id; name String; }</code>来表示<code>User</code>表。 - 这种方式将数据库结构和业务逻辑中的数据模型进行了清晰的分离。</td>
+<td>- 在代码中直接使用 JavaScript 或 TypeScript 来定义数据库架构，通常是通过函数调用和对象字面量的方式。 - 例如，在 Drizzle 中可能会定义一个表结构类似<code>const usersTable = drizzle.schema.createTable(&quot;users&quot;, { columns: { id: int(&quot;id&quot;).primaryKey(), name: varchar(&quot;name&quot;) } });</code>。</td>
+</tr>
+<tr>
+<td><strong>数据库迁移</strong></td>
+<td>- Prisma 提供了一套完整的迁移工具，通过<code>prisma migrate</code>命令。它可以自动生成迁移文件，并将数据库结构的变更应用到数据库中。 - 能够很好地跟踪数据库架构的变化历史，方便团队协作和在不同环境中同步数据库结构。</td>
+<td>- Drizzle 的迁移相对来说更加灵活，它可以通过编写自定义的 SQL 脚本或者利用一些社区提供的轻量级迁移工具来实现数据库迁移。 - 这种方式对于熟悉 SQL 的开发者来说可能更加直观，但可能需要开发者自己处理更多的细节，比如版本控制和冲突解决。</td>
+</tr>
+<tr>
+<td><strong>查询构建</strong></td>
+<td>- Prisma 提供了一种流畅的、面向对象的查询构建方式。例如，要查询用户列表可以这样写：<code>const users = await prisma.user.findMany();</code>，这种方式很符合 JavaScript/TypeScript 开发者的习惯。 - 支持复杂的关联查询，并且能够自动处理关系数据的加载和解析，通过<code>include</code>和<code>select</code>关键字等可以灵活控制查询的数据范围。</td>
+<td>- Drizzle 的查询构建更接近 SQL 的思维方式，在代码中会看到更多 SQL 语法的影子。例如，<code>const query = select().from(usersTable).where(eq(usersTable.id, 1));</code>。 - 对于简单查询来说，它可能看起来比较简洁明了，但对于复杂的关联查询和嵌套查询，可能需要编写更多的代码来实现相同的功能。</td>
+</tr>
+<tr>
+<td><strong>类型安全</strong></td>
+<td>- Prisma 在类型安全方面表现出色，它会根据定义的<code>.prisma</code>文件自动生成类型定义文件（<code>.d.ts</code>），在代码编辑器中能够提供很好的类型提示。 - 这使得在编写查询和处理数据时，能够及时发现类型不匹配等错误，减少运行时错误的发生。</td>
+<td>- Drizzle 也注重类型安全，它通过使用 TypeScript 的类型系统，结合自身的类型定义，为数据库操作提供类型支持。 - 不过，由于其查询构建方式比较灵活，可能需要开发者更加仔细地定义和维护类型，以确保类型安全。</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>- Prisma 在性能方面做了很多优化，尤其是在处理大量数据和复杂查询时，它能够有效地利用数据库连接池，减少不必要的数据库请求。 - 不过，在一些特定场景下，如高度定制化的 SQL 查询或者对性能要求极高的场景，可能会受到其抽象层的限制。</td>
+<td>- Drizzle 由于其更接近底层 SQL 的操作方式，在性能优化方面可能具有一定的灵活性。开发者可以根据具体的性能需求编写更高效的 SQL 查询。 - 但是，这也意味着开发者需要对数据库性能优化有更深入的了解，并且在代码维护过程中需要更加注意性能问题。</td>
+</tr>
+<tr>
+<td><strong>生态系统和社区支持</strong></td>
+<td>- Prisma 拥有较大的社区和丰富的文档资源，许多流行的框架和工具都有与之集成的案例和插件。 - 这使得在遇到问题时，更容易找到解决方案，并且可以方便地与其他技术栈进行整合。</td>
+<td>- Drizzle 相对来说是一个较新的工具，社区规模较小，但正在逐渐发展壮大。 - 文档资源也在不断完善，在一些新兴的技术栈或者对灵活性要求较高的项目中开始得到应用。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="prisma-usefull-tips">Prisma usefull tips</h2>
+<p>以下是 Prisma 的使用场景，感受以下 Prisma 的便捷性：</p>
+<ol>
+<li>关联数据创建场景：初始化项目以及项目的管理员</li>
+</ol>
+<pre><code class="language-typescript">const project = await prisma.project.create({
+    data: {
+        title: 'default project',
+        owner: {
+            create: {
+                username: '管理员'
+            }
+        }
+    }
+})
+</code></pre>
+<ol start="2">
+<li>关联查询场景：查询项目详情并关联出管理员信息</li>
+</ol>
+<pre><code class="language-typescript">// 关联查询
+function getProject(id: string) {
+    return prisma.project.findUnique({
+        where: {
+            id
+        },
+        include: {
+            owner: true,
+        }
+    })
+}
+</code></pre>
+<h2 id="cloudflare-d1-支持">Cloudflare D1 支持</h2>
+<ul>
+<li>Cloudlfare D1 提供足够的免费额度，开发者也不需要为数据库的运维费心思</li>
+<li>基于 sqlite 的 D1 数据类型支持的不多，比如无法支持枚举类型</li>
+</ul>
+<p>参考 <a href="https://www.prisma.io/docs/orm/overview/databases/cloudflare-d1">Prsimajs 官方文档</a></p>
+<h2 id="使用-zod-prisma-自动生成校验文件">使用 zod-prisma 自动生成校验文件</h2>
+<ol>
+<li>安装 <code>zod-prisma</code>；</li>
+<li>配置 schema.prisma 文件；</li>
+</ol>
+<pre><code class="language-prisma">generator zod {
+  provider = &quot;zod-prisma&quot;
+  output   = &quot;./zods&quot;
+}
+</code></pre>
+<ol start="3">
+<li>运行 prisma generate 时，会自动根据数据库的定义生成 zod 文件；</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[结合 react-email 零成本定制邮件系统]]></title>
+        <id>https://youking-lib.github.io/post/send-email/</id>
+        <link href="https://youking-lib.github.io/post/send-email/">
+        </link>
+        <updated>2024-12-26T13:27:53.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>有两种常用的方式：</p>
+<ol>
+<li>域名解析到邮件 Saas 服务，如 <a href="https://resend.com/">Resend</a>、<a href="https://www.useplunk.com/">Plunk</a> 等，推荐 Plunk，开源且支持独立部署；</li>
+<li>SMTP + nodemailer</li>
+</ol>
+<p>方式1 比较简单，但依赖自己的域名 TXT 等记录解析，可以直接参考官方文档进行配置。</p>
+<p>由于笔者已经将邮件托管到了飞书，因此选择第二种方式。</p>
+<h2 id="使用-nodemailer-发送邮件">使用 nodemailer 发送邮件</h2>
+<ol>
+<li>邮件管理界面获取邮件的 SMTP</li>
+</ol>
+<pre><code># .env
+EMAIL_HOST=smtp.feishu.cn
+EMAIL_PORT=465
+EMAIL_USER=support@domain.com
+EMAIL_PASS=your smtp pass
+EMAILDEFAULT_FROM=support@domain.com
+</code></pre>
+<pre><code class="language-typescript">export const emailConstants = {
+  HOST: process.env.EMAIL_HOST!,
+  PORT: Number(process.env.EMAIL_PORT!),
+  USER: process.env.EMAIL_USER!,
+  PASS: process.env.EMAIL_PASS!,
+  EMAILDEFAULT_FROM: process.env.EMAILDEFAULT_FROM!
+};
+</code></pre>
+<ol start="2">
+<li>使用 nodemailer 发送邮件</li>
+</ol>
+<pre><code class="language-typescript">import nodemailer from 'nodemailer';
+import { emailConstants } from './constants';
+
+export type CreateEmailSenderOptions = {
+  host: string;
+  port: number;
+  secure: boolean;
+  auth: {
+    user: string;
+    pass: string;
+  };
+};
+export type SendMailOptions = {
+  from?: string;
+  to: string;
+  body: string;
+  subject: string;
+};
+const transporter = nodemailer.createTransport({
+  host: emailConstants.HOST,
+  port: emailConstants.PORT,
+  secure: true,
+  auth: {
+    user: emailConstants.USER,
+    pass: emailConstants.PASS
+  }
+});
+
+export async function sendEmail({ from, to, body, subject }: SendMailOptions) {
+  return transporter.sendMail({
+    to,
+    subject,
+    from: from || emailConstants.EMAILDEFAULT_FROM,
+    html: body
+  });
+}
+</code></pre>
+<h2 id="使用-react-email-定制邮件模版">使用 react-email 定制邮件模版</h2>
+<blockquote>
+<p>受限于 Cloudflare Worker 的运行时，nodemailer 还不支持运行在 Cloudlfare Worker 上，<a href="https://github.com/nodemailer/nodemailer/issues/1623#issuecomment-1976024001">参考 Issue</a></p>
+</blockquote>
+<ol>
+<li>推荐先使用 nextjs 初始化一个项目</li>
+<li><a href="https://react.email/docs/getting-started/manual-setup">手动安装 react-emial</a></li>
+</ol>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;email-app&quot;,
+  &quot;scripts&quot;: {
+    &quot;dev:email&quot;: &quot;email dev&quot;,
+  },
+  &quot;devDependencies&quot;: {
+    &quot;react-email&quot;: &quot;^3.0.1&quot;,
+  }
+}
+</code></pre>
+<ol start="3">
+<li>
+<p>编写邮件模版</p>
+</li>
+<li>
+<p>测试发送模版</p>
+</li>
+</ol>
+<pre><code class="language-typescript">import { render } from '@react-email/components';
+import { sendEmail } from '@/libs/email';
+
+const html = await render(&lt;WelcomeEmail /&gt;)
+
+sendEmail({
+    to: 'youremail@gmail.com',
+    subject: 'Welcome!',
+    body: html
+});
+</code></pre>
+<h2 id="使用-openapi-构建独立的邮件服务">使用 OpenAPI 构建独立的邮件服务</h2>
+<ol>
+<li>定义发送邮件路由</li>
+</ol>
+<pre><code class="language-typescript">export const SendEmailRoute = createRoute({
+  tags: ['Email'],
+  method: 'post',
+  path: '/send-email',
+  request: {
+    body: {
+      content: {
+        'application/json': {
+          schema: z.object({
+            from: z.string().optional(),
+            to: z.string(),
+            subject: z.string(),
+            body: z.string()
+          })
+        }
+      }
+    }
+  },
+  responses: {
+    200: {
+      content: {
+        'application/json': {
+          schema: z.object({
+            success: z.boolean()
+          })
+        }
+      },
+      description: 'SendEmailRoute'
+    }
+  }
+});
+</code></pre>
+<ol start="2">
+<li>路由实现</li>
+</ol>
+<pre><code class="language-typescript">export function email(api: OpenAPIHono) {
+  api.openapi(SendEmailRoute, async c =&gt; {
+    const body = c.req.valid('json');
+
+    await sendEmail({
+      from: body.from,
+      to: body.to,
+      subject: body.subject,
+      body: body.body
+    });
+
+    return c.json(
+      {
+        success: true
+      },
+      200
+    );
+  });
+}
+</code></pre>
+<p>参考：</p>
+<blockquote>
+<p><a href="https://demo.react.email/preview/notifications/vercel-invite-user">react-email template</a><br>
+<a href="https://github.com/dubinc/dub/tree/main/apps/web/emails">dub.com 项目的邮件模版</a></p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[比 langchainjs 更好用的 AI SDK]]></title>
+        <id>https://youking-lib.github.io/post/ai-sdk-guide/</id>
+        <link href="https://youking-lib.github.io/post/ai-sdk-guide/">
+        </link>
+        <updated>2024-12-26T13:18:46.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="优势">优势</h2>
+<ul>
+<li>支持不同的模型提供商，如 Azure、Cloudflare 等；</li>
+<li>使用 zodjs 约定模型输入输出的数据模型，完善的类型推导；</li>
+<li>完善的流式传输支持</li>
+</ul>
+<ol>
+<li>支持不同的模型提供商</li>
+</ol>
+<pre><code class="language-typescript">import { createAzure } from '@ai-sdk/azure'
+import { createOpenAI } from '@ai-sdk/openai'
+
+import { LanguageModelV1, EmbeddingModel } from 'ai'
+
+const azure = createAzure({
+  apiKey: '[KEY]',
+  baseURL: 'https:/[DEPLOYMENT].openai.azure.com/openai/deployments',
+})
+
+export const openai = createOpenAI({
+  apiKey: 'xxx',
+})
+</code></pre>
+<ol start="2">
+<li>流式传输支持</li>
+</ol>
+<pre><code class="language-typescript">// nextjs api/chat/route.ts
+export async function POST() {
+    cosnt res = await streamText({
+        model,
+        prompt: '提醒我明天上午上班',
+        tools: {
+            createTool
+        }
+    })
+
+    return res.toDataStreamResponse();
+}
+</code></pre>
+<pre><code class="language-typescript">// hono
+app.post('/api/chat', async c =&gt; {
+    cosnt res = await streamText({
+        model,
+        prompt: '提醒我明天上午上班',
+        tools: {
+            createTool
+        }
+    })
+
+    return res.toDataStreamResponse();
+})
+</code></pre>
+<ol start="3">
+<li>支持生成结构化数据</li>
+</ol>
+<pre><code class="language-typescript">const { object } = await generateObject({
+  model: azure('gpt-4o'),
+  schema: z.object({
+    username: z.string(),
+  }),
+  prompt: '提取用户名称.',
+});
+
+console.log(object.username)
+</code></pre>
+<ol start="4">
+<li>基于 zodjs，严格约定大模型 Function Call 的返回结果</li>
+</ol>
+<pre><code class="language-typescript">const createTodo = tool({
+    description: '添加待办提醒',
+    parameters: z.object({
+      title: z.string().describe('待办的内容，尽量保存用户的原始输入，不要做任何处理'),
+      expiredAt: z.string().optional().describe('待办到期时间，如果，格式为 YYYY-MM-DD HH:mm:ss'),
+    }),
+    async execute(params) {
+        console.log(params.title, params.expiredAt)
+    }
+})
+</code></pre>
+<p>相关：</p>
+<ul>
+<li>[AI] RAG 技术方案</li>
+<li>[AI] 提升 AI 记忆的常用方案</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用 Caddy 轻松代替 Nginx，实现 HTTPS 自动续杯！]]></title>
+        <id>https://youking-lib.github.io/post/caddy-guide/</id>
+        <link href="https://youking-lib.github.io/post/caddy-guide/">
+        </link>
+        <updated>2024-12-26T13:09:57.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="优势">优势</h2>
+<ul>
+<li>安装使用非常简单，配置文件简洁易读</li>
+<li>自动 HTTPS，证书自动更新</li>
+</ul>
+<h2 id="用法">用法</h2>
+<ol>
+<li>
+<p>按照 <a href="https://caddyserver.com/docs/install">官方文档</a>，选择对应的服务器版本安装 Caddy</p>
+</li>
+<li>
+<p>编写配置文件，反向代理运行在 3000 端口的服务</p>
+</li>
+</ol>
+<pre><code class="language-yaml"># Caddyfile
+app.domain.com {
+        reverse_proxy :3000 {
+                header_up Host {host} # redundant
+                header_up X-Real-IP {remote}
+                header_up X-Forwarded-Port {server_port} # redundant
+        }
+}
+</code></pre>
+<ol start="3">
+<li>启动</li>
+</ol>
+<pre><code class="language-shell">caddy adapt -c ./Caddyfile
+caddy run
+</code></pre>
+<ol start="4">
+<li>代理 OpenAI 的 API 接口</li>
+</ol>
+<pre><code class="language-yaml">openai-api-proxy.domain.com {
+    reverse_proxy /* https://api.openai.com {
+        header_up -*
+        header_up Host api.openai.com
+        header_up Authorization {http.request.header.authorization}
+        header_up Content-Type {http.request.header.content-type}
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-For {remote}    
+    }
+}
+</code></pre>
+<ol start="5">
+<li>更新配置</li>
+</ol>
+<pre><code class="language-shell">caddy adapt -c ./Caddyfile
+caddy reload
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用 Docker Compose 快速部署常用的服务]]></title>
+        <id>https://youking-lib.github.io/post/usefull-docker-compose-configs/</id>
+        <link href="https://youking-lib.github.io/post/usefull-docker-compose-configs/">
+        </link>
+        <updated>2024-12-26T12:29:06.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<ol>
+<li>按照 <a href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository">官方文档</a> 安装 docker</li>
+</ol>
+<pre><code class="language-shell">curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+</code></pre>
+<ol start="2">
+<li><a href="https://docs.portainer.io/start/install/server/docker/linux">安装图形化的管理面板 portainer</a></li>
+</ol>
+<h2 id="常用指令">常用指令</h2>
+<ol>
+<li>启动服务</li>
+</ol>
+<pre><code class="language-shell">cd ~/apps/mysql/docker-compose.yml
+docker compose up -d
+</code></pre>
+<ol start="2">
+<li>停用服务</li>
+</ol>
+<pre><code class="language-shell">cd ~/apps/mysql/docker-compose.yml
+docker down
+</code></pre>
+<ol start="3">
+<li>查看容器日志</li>
+</ol>
+<pre><code class="language-shell">docker container ls
+docker logs [id]
+</code></pre>
+<ol start="4">
+<li>进入容器</li>
+</ol>
+<pre><code class="language-shell">docker exec [id] -it /bin/bash
+</code></pre>
+<h2 id="常用配置一览">常用配置一览</h2>
+<p>笔者习惯将 Volume 目录放到 <code>docker-compose.yml</code> 同级目录下，方便管理，因此会作形如下面的配置：</p>
+<pre><code class="language-yml">services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mysql/confs:/etc/mysql
+</code></pre>
+<h3 id="saas-dify">[SAAS] Dify</h3>
+<ol>
+<li><a href="https://docs.dify.ai/zh-hans/getting-started/install-self-hosted/docker-compose">部署文档</a></li>
+<li>修改 <code>.env</code> 文件，部署监听在非 80 端口</li>
+</ol>
+<pre><code class="language-env">EXPOSE_NGINX_PORT=8001
+</code></pre>
+<ol start="3">
+<li>使用 Caddy 方向代理</li>
+</ol>
+<pre><code class="language-yml">dify.yourdomain.com {
+        reverse_proxy :8001 {
+                header_up Host {host} # redundant
+                header_up X-Real-IP {remote}
+                header_up X-Forwarded-Port {server_port} # redundant
+        }
+}
+</code></pre>
+<h3 id="saas-umami">[SAAS] Umami</h3>
+<ol>
+<li>配置文件</li>
+</ol>
+<pre><code class="language-yml"># apps/umami/docker-compose.yml
+services:
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    ports:
+      - &quot;3000:3000&quot;
+    environment:
+      DATABASE_URL: postgresql://umami:umami@db:5432/umami
+      DATABASE_TYPE: postgresql
+      APP_SECRET: replace-me-with-a-random-string
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    healthcheck:
+      test: [&quot;CMD-SHELL&quot;, &quot;curl http://localhost:3000/api/heartbeat&quot;]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: umami
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/umami/data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: [&quot;CMD-SHELL&quot;, &quot;pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}&quot;]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  umami-db-data
+</code></pre>
+<ol start="2">
+<li>使用 Caddy 反向代理</li>
+</ol>
+<pre><code class="language-yml">umami.yourdomain.com {
+        reverse_proxy :3000 {
+                header_up Host {host} # redundant
+        }
+}
+</code></pre>
+<h3 id="saas-flowise-ai">[SAAS] Flowise AI</h3>
+<pre><code class="language-yml"># apps/flowise/docker-compose.yml
+services:
+    flowise:
+        image: flowiseai/flowise
+        restart: always
+        environment:
+            - PORT=${PORT}
+            - CORS_ORIGINS=${CORS_ORIGINS}
+            - IFRAME_ORIGINS=${IFRAME_ORIGINS}
+            - FLOWISE_USERNAME=${FLOWISE_USERNAME}
+            - FLOWISE_PASSWORD=${FLOWISE_PASSWORD}
+            - FLOWISE_FILE_SIZE_LIMIT=${FLOWISE_FILE_SIZE_LIMIT}
+            - DEBUG=${DEBUG}
+            - DATABASE_PATH=${DATABASE_PATH}
+            - DATABASE_TYPE=${DATABASE_TYPE}
+            - DATABASE_PORT=${DATABASE_PORT}
+            - DATABASE_HOST=${DATABASE_HOST}
+            - DATABASE_NAME=${DATABASE_NAME}
+            - DATABASE_USER=${DATABASE_USER}
+            - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+            - DATABASE_SSL=${DATABASE_SSL}
+            - DATABASE_SSL_KEY_BASE64=${DATABASE_SSL_KEY_BASE64}
+            - APIKEY_PATH=${APIKEY_PATH}
+            - SECRETKEY_PATH=${SECRETKEY_PATH}
+            - FLOWISE_SECRETKEY_OVERWRITE=${FLOWISE_SECRETKEY_OVERWRITE}
+            - LOG_LEVEL=${LOG_LEVEL}
+            - LOG_PATH=${LOG_PATH}
+            - BLOB_STORAGE_PATH=${BLOB_STORAGE_PATH}
+            - DISABLE_FLOWISE_TELEMETRY=${DISABLE_FLOWISE_TELEMETRY}
+            - MODEL_LIST_CONFIG_JSON=${MODEL_LIST_CONFIG_JSON}
+        ports:
+            - '${PORT}:${PORT}'
+        volumes:
+            - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/flowise:/root/.flowise
+        entrypoint: /bin/sh -c &quot;sleep 3; flowise start&quot;
+</code></pre>
+<h3 id="saas-firecrawl-爬虫">[SAAS] Firecrawl 爬虫</h3>
+<ol>
+<li>克隆仓库 <code>gitl clone git@github.com:mendableai/firecrawl.git</code></li>
+<li>修改 <code>docker-compose.yml</code> 文件</li>
+</ol>
+<pre><code class="language-yml">name: firecrawl
+
+x-common-service: &amp;common-service
+  build: 
+    context: apps/api
+    args:
+      - http_proxy=http://10.74.176.8:11080
+      - https_proxy=http://10.74.176.8:11080
+  networks:
+    - backend
+  extra_hosts:
+    - &quot;host.docker.internal:host-gateway&quot;
+
+services:
+  playwright-service:
+    build: 
+      context: apps/playwright-service-ts
+      args:
+        - http_proxy=http://10.74.176.8:11080
+        - https_proxy=http://10.74.176.8:11080
+    environment:
+      - PORT=3003
+      - PROXY_SERVER=${PROXY_SERVER}
+      - PROXY_USERNAME=${PROXY_USERNAME}
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
+      - BLOCK_MEDIA=${BLOCK_MEDIA}
+    ports:
+      - &quot;3003:3003&quot;
+    networks:
+      - backend
+
+  api:
+    &lt;&lt;: *common-service
+    environment:
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      REDIS_RATE_LIMIT_URL: ${REDIS_URL:-redis://redis:6379}
+      PLAYWRIGHT_MICROSERVICE_URL: ${PLAYWRIGHT_MICROSERVICE_URL:-http://playwright-service:3000}
+      USE_DB_AUTHENTICATION: ${USE_DB_AUTHENTICATION}
+      PORT: ${PORT:-3002}
+      NUM_WORKERS_PER_QUEUE: ${NUM_WORKERS_PER_QUEUE}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+      MODEL_NAME: ${MODEL_NAME:-gpt-4o}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+      LLAMAPARSE_API_KEY: ${LLAMAPARSE_API_KEY}
+      LOGTAIL_KEY: ${LOGTAIL_KEY}
+      BULL_AUTH_KEY: ${BULL_AUTH_KEY}
+      TEST_API_KEY: ${TEST_API_KEY}
+      POSTHOG_API_KEY: ${POSTHOG_API_KEY}
+      POSTHOG_HOST: ${POSTHOG_HOST}
+      SUPABASE_ANON_TOKEN: ${SUPABASE_ANON_TOKEN}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_TOKEN: ${SUPABASE_SERVICE_TOKEN}
+      SCRAPING_BEE_API_KEY: ${SCRAPING_BEE_API_KEY}
+      HOST: ${HOST:-0.0.0.0}
+      SELF_HOSTED_WEBHOOK_URL: ${SELF_HOSTED_WEBHOOK_URL}
+      LOGGING_LEVEL: ${LOGGING_LEVEL}
+      FLY_PROCESS_GROUP: app
+    depends_on:
+      - redis
+      - playwright-service
+    ports:
+      - &quot;3002:3002&quot;
+    command: [ &quot;pnpm&quot;, &quot;run&quot;, &quot;start:production&quot; ]
+
+  worker:
+    &lt;&lt;: *common-service
+    environment:
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      REDIS_RATE_LIMIT_URL: ${REDIS_URL:-redis://redis:6379}
+      PLAYWRIGHT_MICROSERVICE_URL: ${PLAYWRIGHT_MICROSERVICE_URL:-http://playwright-service:3000}
+      USE_DB_AUTHENTICATION: ${USE_DB_AUTHENTICATION}
+      PORT: ${PORT:-3002}
+      NUM_WORKERS_PER_QUEUE: ${NUM_WORKERS_PER_QUEUE}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+      MODEL_NAME: ${MODEL_NAME:-gpt-4o}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+      LLAMAPARSE_API_KEY: ${LLAMAPARSE_API_KEY}
+      LOGTAIL_KEY: ${LOGTAIL_KEY}
+      BULL_AUTH_KEY: ${BULL_AUTH_KEY}
+      TEST_API_KEY: ${TEST_API_KEY}
+      POSTHOG_API_KEY: ${POSTHOG_API_KEY}
+      POSTHOG_HOST: ${POSTHOG_HOST}
+      SUPABASE_ANON_TOKEN: ${SUPABASE_ANON_TOKEN}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_TOKEN: ${SUPABASE_SERVICE_TOKEN}
+      SCRAPING_BEE_API_KEY: ${SCRAPING_BEE_API_KEY}
+      HOST: ${HOST:-0.0.0.0}
+      SELF_HOSTED_WEBHOOK_URL: ${SELF_HOSTED_WEBHOOK_URL}
+      LOGGING_LEVEL: ${LOGGING_LEVEL}
+      FLY_PROCESS_GROUP: worker
+    depends_on:
+      - redis
+      - playwright-service
+      - api
+    command: [ &quot;pnpm&quot;, &quot;run&quot;, &quot;workers&quot; ]
+
+  redis:
+    image: redis:alpine
+    networks:
+      - backend
+    command: redis-server --bind 0.0.0.0
+
+networks:
+  backend:
+    driver: bridge
+</code></pre>
+<ol start="3">
+<li>添加环境变量文件</li>
+</ol>
+<ul>
+<li>内网环境酌情配置 <code>PROXY_SERVER</code> 代理访问</li>
+</ul>
+<pre><code class="language-txt"># ===== Required ENVS ======
+NUM_WORKERS_PER_QUEUE=8 
+PORT=3002
+HOST=0.0.0.0
+REDIS_URL=redis://redis:6379 #for self-hosting using docker, use redis://redis:6379. For running locally, use redis://localhost:6379
+REDIS_RATE_LIMIT_URL=redis://redis:6379 #for self-hosting using docker, use redis://redis:6379. For running locally, use redis://localhost:6379
+PLAYWRIGHT_MICROSERVICE_URL=http://172.28.214.245:3003/scrape
+
+## To turn on DB authentication, you need to set up supabase.
+USE_DB_AUTHENTICATION=false
+
+# ===== Optional ENVS ======
+
+# Supabase Setup (used to support DB authentication, advanced logging, etc.)
+SUPABASE_ANON_TOKEN= 
+SUPABASE_URL= 
+SUPABASE_SERVICE_TOKEN=
+
+# Other Optionals
+# use if you've set up authentication and want to test with a real API key
+TEST_API_KEY=
+# set if you'd like to test the scraping rate limit
+RATE_LIMIT_TEST_API_KEY_SCRAPE=
+# set if you'd like to test the crawling rate limit
+RATE_LIMIT_TEST_API_KEY_CRAWL=
+# set if you'd like to use scraping Be to handle JS blocking
+SCRAPING_BEE_API_KEY=
+# add for LLM dependednt features (image alt generation, etc.)
+OPENAI_API_KEY=
+BULL_AUTH_KEY=@
+# use if you're configuring basic logging with logtail
+LOGTAIL_KEY=
+# set if you have a llamaparse key you'd like to use to parse pdfs
+LLAMAPARSE_API_KEY=
+# set if you'd like to send slack server health status messages
+SLACK_WEBHOOK_URL=
+# set if you'd like to send posthog events like job logs
+POSTHOG_API_KEY=
+# set if you'd like to send posthog events like job logs
+POSTHOG_HOST=
+
+STRIPE_PRICE_ID_STANDARD=
+STRIPE_PRICE_ID_SCALE=
+STRIPE_PRICE_ID_STARTER=
+STRIPE_PRICE_ID_HOBBY=
+STRIPE_PRICE_ID_HOBBY_YEARLY=
+STRIPE_PRICE_ID_STANDARD_NEW=
+STRIPE_PRICE_ID_STANDARD_NEW_YEARLY=
+STRIPE_PRICE_ID_GROWTH=
+STRIPE_PRICE_ID_GROWTH_YEARLY=
+
+HYPERDX_API_KEY=
+HDX_NODE_BETA_MODE=1
+
+# set if you'd like to use the fire engine closed beta
+FIRE_ENGINE_BETA_URL=
+
+# Proxy Settings for Playwright (Alternative you can can use a proxy service like oxylabs, which rotates IPs for you on every request)
+PROXY_SERVER=
+PROXY_USERNAME=
+PROXY_PASSWORD=
+# set if you'd like to block media requests to save proxy bandwidth
+BLOCK_MEDIA=
+
+# Set this to the URL of your webhook when using the self-hosted version of FireCrawl
+SELF_HOSTED_WEBHOOK_URL=
+
+# Resend API Key for transactional emails
+RESEND_API_KEY=
+
+# LOGGING_LEVEL determines the verbosity of logs that the system will output.
+# Available levels are:
+# NONE - No logs will be output.
+# ERROR - For logging error messages that indicate a failure in a specific operation.
+# WARN - For logging potentially harmful situations that are not necessarily errors.
+# INFO - For logging informational messages that highlight the progress of the application.
+# DEBUG - For logging detailed information on the flow through the system, primarily used for debugging.
+# TRACE - For logging more detailed information than the DEBUG level.
+# Set LOGGING_LEVEL to one of the above options to control logging output.
+LOGGING_LEVEL=DEBUG
+</code></pre>
+<h3 id="数据库-mysql">[数据库] Mysql</h3>
+<pre><code class="language-yml"># apps/mysql/docker-compose.yml
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: xxx_PASSWORD
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mysql/confs:/etc/mysql
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mysql/logs:/var/log/mysql
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mysql/data:/var/lib/mysql
+    ports:
+      - 3306:3306
+</code></pre>
+<h3 id="数据库-mongodb">[数据库] MongoDB</h3>
+<pre><code class="language-yml"># apps/mongo/docker-compose.yml
+services:
+  mongo:
+    image: 'mongo:7.0.5'
+    ports:
+      - 27017:27017
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mongo:/var/lib/mongodb/data
+
+  mongo-express:
+    image: 'mongo-express:1.0.2'
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+</code></pre>
+<h3 id="数据库-milvus">[数据库] Milvus</h3>
+<pre><code class="language-yml"># apps/milvus/docker-compose.yml
+services:
+  etcd:
+    container_name: milvus-etcd
+    restart: always
+    image: quay.io/coreos/etcd:v3.5.14
+    environment:
+      - ETCD_AUTO_COMPACTION_MODE=revision
+      - ETCD_AUTO_COMPACTION_RETENTION=1000
+      - ETCD_QUOTA_BACKEND_BYTES=4294967296
+      - ETCD_SNAPSHOT_COUNT=50000
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/etcd:/etcd
+    command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;etcdctl&quot;, &quot;endpoint&quot;, &quot;health&quot;]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  minio:
+    container_name: milvus-minio
+    restart: always
+    image: minio/minio:RELEASE.2023-03-20T20-16-18Z
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - &quot;9001:9001&quot;
+      - &quot;19000:9000&quot;
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
+    command: minio server /minio_data --console-address &quot;:9001&quot;
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;curl&quot;, &quot;-f&quot;, &quot;http://localhost:9000/minio/health/live&quot;]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  standalone:
+    container_name: milvus-standalone
+    image: milvusdb/milvus:v2.4.11
+    command: [&quot;milvus&quot;, &quot;run&quot;, &quot;standalone&quot;]
+    security_opt:
+    - seccomp:unconfined
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;curl&quot;, &quot;-f&quot;, &quot;http://localhost:9091/healthz&quot;]
+      interval: 30s
+      start_period: 90s
+      timeout: 20s
+      retries: 3
+    ports:
+      - &quot;19530:19530&quot;
+      - &quot;9091:9091&quot;
+    depends_on:
+      - &quot;etcd&quot;
+      - &quot;minio&quot;
+  attu:
+    container_name: attu
+    image: zilliz/attu:latest
+    environment:
+      MILVUS_URL: milvus-standalone:19530
+    ports:
+      - &quot;9002:3000&quot;
+    depends_on:
+      - &quot;standalone&quot;
+
+networks:
+  default:
+    name: milvus
+</code></pre>
+<h3 id="数据库-neo4j">[数据库] Neo4j</h3>
+<pre><code class="language-yml"># apps/neo4j/docker-compose.yml
+services:
+  neo4j:
+    image: neo4j:4.4.38
+    restart: always
+    environment:
+      - NEO4J_AUTH=neo4j/neo4j_passowrd
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+      - NEO4J_dbms_connector_bolt_listen__address=7688
+      - NEO4J_dbms_connector_bolt_advertised__address=7688
+      - NEO4J_PLUGINS=[&quot;apoc&quot;, &quot;graph-data-science&quot;]
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/neo4j/data:/data
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/neo4j/logs:/logs
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/neo4j/config:/config
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/neo4j/plugins:/plugins
+    ports: 
+      - 7474:7474
+      - 7687:7687
+</code></pre>
+<h3 id="中间件-kafka">[中间件] Kafka</h3>
+<pre><code class="language-yml"># apps/kafka/docker-compose.yml
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    restart: always
+    ports:
+      - 2181:2181
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: &quot;yes&quot;
+  kafka:
+    image: 'bitnami/kafka:latest'
+    restart: always
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: &quot;yes&quot;
+      KAFKA_ADVERTISED_HOST_NAME: 101.43.207.38                  ## 修改:宿主机IP
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://101.43.207.38:9092    ## 修改:宿主机IP
+      KAFKA_ZOOKEEPER_CONNECT: &quot;101.43.207.38:2181&quot;
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 8888:8080
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=dev_cluster
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=101.43.207.38:9092
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[基于 trubo、pnpm、nextjs、tsup 的 monorepo 放题]]></title>
+        <id>https://youking-lib.github.io/post/turbo-monorepo-buffet/</id>
+        <link href="https://youking-lib.github.io/post/turbo-monorepo-buffet/">
+        </link>
+        <updated>2024-12-25T07:23:59.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="方案-优势">方案 &amp; 优势</h2>
+<p>方案有以下优势：</p>
+<ul>
+<li>使用 <a href="https://turbo.build/repo/docs">turbo</a> 进行依赖任务构建；</li>
+<li>使用 <a href="https://pnpm.io/installation">pnpm</a> 快速高效的链接多个 Package；</li>
+<li>使用 <a href="https://nextjs.org/docs">Nextjs</a> 全方位提升 React 开发体验，并提供轻量级的 API 服务；</li>
+<li>使用 <a href="https://tsup.egoist.dev/#install">tsup</a> 处理特殊场景的打包构建，如构建符合 commonjs 规范的包（Package）或捆绑文件（Bundle File）等。</li>
+</ul>
+<p>模版可以直接通过 turbo 的生成：</p>
+<pre><code class="language-shell">pnpm dlx create-turbo@latest
+</code></pre>
+<h2 id="关键行动">关键行动</h2>
+<h3 id="使用-turbo-进行依赖任务构建">使用 turbo 进行依赖任务构建</h3>
+<p>Nodejs 的依赖是一个有向无环图结构，使用 pnpm 以 monorepo 的方式组织源代码不可避免的出现依赖构建问题，以下方目录以及形成的依赖关系为例：</p>
+<ul>
+<li>构建 <code>apps/api</code> 之前先要构建 <code>packages/b</code></li>
+<li>修改 <code>packages/b</code> 要重新构建 <code>apps/api</code></li>
+</ul>
+<pre><code>project
+├── apps
+│   ├── api
+│   └── web
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── packages
+│   ├── a
+│   └── b
+└── turbo.json
+
+# 依赖关系
+web/node_modules/a/node_modues/b
+api/node_modules/a/node_modues/b
+</code></pre>
+<p>turbo 解决构建依赖问题仅需执行 <code>trubo run build --filter=api...</code> 这一简单命令。</p>
+<h3 id="使用-tsup-处理特殊场景的打包构建">使用 tsup 处理特殊场景的打包构建</h3>
+<p>需要单独打包的场景很多，本文主要介绍其中常见的两种，也是笔者经常使用 tsup 进行处理的：</p>
+<ul>
+<li>需要独立发布、部署的 JS Bundle 文件，如 SDK 等；</li>
+<li>遇到必须使用的旧版本 Package，要求必须在 Commonjs 规范的上下文；</li>
+</ul>
+<h4 id="竞品对比">竞品对比</h4>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>TSUP</th>
+<th>Vite</th>
+<th>Webpack</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构建速度</td>
+<td>基于 Esbuild，速度极快，处理中小项目瞬间完成</td>
+<td>开发模式下冷启动快，利用浏览器原生 ES 模块，热更新迅速</td>
+<td>相对较慢，需要分析整个项目模块，有优化策略可提升速度</td>
+</tr>
+<tr>
+<td>开发体验</td>
+<td>侧重于打包，简单直接，开发服务器功能少</td>
+<td>热更新功能强大，开发服务器支持多种配置，如代理，方便处理跨域</td>
+<td>配置插件和开发服务器后体验不错，但配置复杂，学习成本高</td>
+</tr>
+<tr>
+<td>生态系统和插件支持</td>
+<td>生态系统相对小，插件支持有限，能满足基本打包需求</td>
+<td>生态系统不断壮大，针对不同框架有插件，还有性能优化和开发体验相关插件</td>
+<td>生态系统庞大，几乎能找到满足任何需求的插件</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>适用于简单 TypeScript 项目，如注重快速打包的工具库、小型命令行工具等</td>
+<td>现代前端开发，基于 Vue、React 等框架的应用，对开发效率和热更新速度要求高</td>
+<td>复杂大型前端项目，需精细控制打包、深度优化和大量使用插件，对旧浏览器兼容性要求高</td>
+</tr>
+</tbody>
+</table>
+<h4 id="生成-commonjs-规范的-package">生成 Commonjs 规范的 Package</h4>
+<pre><code>project
+├── packages
+│   └── cjs-pkg
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── tsup.config.ts
+└── turbo.json
+</code></pre>
+<p>如以上的目录结构所示，使用 tsup 单独为 <code>cjs-pkg</code> 生成 Commonjs 规范的代码：</p>
+<ol>
+<li>定义 Commonjs 的 Package</li>
+</ol>
+<pre><code class="language-json">// project/packages/cjs-pkg/package.json
+{
+  &quot;name&quot;: &quot;vector-store&quot;,
+  &quot;type&quot;: &quot;commonjs&quot;,
+  &quot;main&quot;: &quot;./dist/index.js&quot;,
+  &quot;types&quot;: &quot;./src/index.ts&quot;,
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;tsup --watch&quot;,
+    &quot;build&quot;: &quot;tsup&quot;,
+  },
+  &quot;devDependencies&quot;: {
+      &quot;tsup&quot;: &quot;^8.3.0&quot;,
+  }
+}
+</code></pre>
+<ol start="2">
+<li>编写 tsup 的配置文件</li>
+</ol>
+<pre><code class="language-typescript">// // project/packages/cjs-pkg/tsup.config.ts
+import { defineConfig, Options } from 'tsup'
+
+export default defineConfig((options: Options) =&gt; ({
+  entry: ['src/index.ts'],
+  format: ['cjs'],
+  target: 'node18',
+  dts: false,
+  shims: true,
+  silent: true,
+  sourcemap: true,
+  ...options,
+}))
+</code></pre>
+<ol start="3">
+<li>运行 dev/build 命令编译输出结果</li>
+</ol>
+<h4 id="使用-tsup-打包构建-sdk">使用 tsup 打包构建 SDK</h4>
+<p>例如在 Shopify 的开发场景中，通常会提供一个 JS 的 SDK 包嵌入商店网站，使用 tsup 可以简单处理这种问题；</p>
+<ol>
+<li>以下面的目录结构为例，期望把 <code>packages/sdk</code> 打包为一个独立的 iife 文件</li>
+</ol>
+<pre><code>project
+├── packages
+│   └── sdk
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── tsup.config.ts
+└── turbo.json
+</code></pre>
+<ol start="2">
+<li>编写 tsup 配置文件</li>
+</ol>
+<pre><code class="language-typescript">// 导入环境变量
+import 'dotenv/config';
+
+export default defineConfig((options: Options) =&gt; ({
+  entry: {
+    index: './src/index.ts',
+    seed: './src/seed.ts'
+  },
+  outDir: './dist,
+  metafile: true,
+  format: ['iife'],
+  esbuildOptions(options) {
+    options.banner = {
+      js: '&quot;use client&quot;'
+    };
+  },
+  env: {
+    NODE_ENV: 'production',
+  },
+  minify: true,
+  ...options
+}));
+</code></pre>
+<p>tsup 的打包方案可以 Cover 住笔者的这两种经常用到的场景，如果有进一步需要定制的打包方案，可以考虑引入 Vite、Webpack。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://youking-lib.github.io/post/about/</id>
+        <link href="https://youking-lib.github.io/post/about/">
+        </link>
+        <updated>2019-01-25T11:09:48.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
+</blockquote>
+<h2 id="关于本站">🏠 关于本站</h2>
+<p>聚焦于前端领域的独立开发</p>
+<h2 id="博主是谁">👨‍💻 博主是谁</h2>
+<p>无业游民，全球度假</p>
+<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
+<ol>
+<li>Golden Cat</li>
+<li>RTT 游戏</li>
+<li>单板滑雪</li>
+</ol>
+<h2 id="联系我呀">📬 联系我呀</h2>
+<p>whistleryz@gmail.com</p>
+]]></content>
+    </entry>
+</feed>
