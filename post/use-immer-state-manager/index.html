@@ -1,0 +1,393 @@
+<html>
+  <head>
+    <meta name="description" content="场景
+
+简单组件的内部状态管理
+复杂的业务组件状态管理
+整个应用的状态管理
+
+优势
+使用 use-immer 管理状态的优势：
+
+[接近原生 JS 的开发体验] 使用接近 js 原生对象的风格操作不可变数据，引入的概念少；
+[与 React..." />
+    <meta name="keywords" content="use-immer,immer,state-manager,react" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>史上最简单高效的状态管理 | Youking</title>
+<link rel="shortcut icon" href="https://youking.vsh.cc/favicon.ico?v=1740048729188">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://youking.vsh.cc/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="史上最简单高效的状态管理 | Youking - Atom Feed" href="https://youking.vsh.cc/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQ7BTC5440"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQ7BTC5440');
+</script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://youking.vsh.cc">
+  <img class="avatar" src="https://youking.vsh.cc/images/avatar.png?v=1740048729188" alt="">
+  </a>
+  <h1 class="site-title">
+    Youking
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="https://youking-lib.github.io" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/youking-lib" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              史上最简单高效的状态管理
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-12-27
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://youking.vsh.cc/tag/nzg9RoPpme/" class="post-tag">
+                  # use-immer
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/IqMfkGT2tir/" class="post-tag">
+                  # immer
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/LRYguwpONYu/" class="post-tag">
+                  # state-manager
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/8At6gfMu-dL/" class="post-tag">
+                  # react
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="场景">场景</h2>
+<ol>
+<li>简单组件的内部状态管理</li>
+<li>复杂的业务组件状态管理</li>
+<li>整个应用的状态管理</li>
+</ol>
+<h2 id="优势">优势</h2>
+<p>使用 use-immer 管理状态的优势：</p>
+<ul>
+<li>[接近原生 JS 的开发体验] 使用接近 js 原生对象的风格操作不可变数据，引入的概念少；</li>
+<li>[与 React 无缝结合] 与 react 结合，状态变更可预测，调试友好，diff 变更时无心智负担；</li>
+<li>[灵活拓展] 按需拓展场景，如 Selector、Mutation 等，状态流转白盒化；</li>
+</ul>
+<h3 id="1-接近原生-js-的开发体验">1 接近原生 JS 的开发体验</h3>
+<ol>
+<li>相对于 zustand、redux 等，引入的概念少，API 设计简单</li>
+</ol>
+<pre><code class="language-typescript">function List() {
+    const [state, dispatch] = useImmer({
+        loading: true,
+        posts: []
+    })
+
+    useEffect(() =&gt; {
+        getAllPosts().then(posts =&gt; {
+            dispatch(draft =&gt; {
+                draft.loading = false;
+                draft.posts = posts;
+            })
+        })
+    }, [])
+}
+</code></pre>
+<ol start="2">
+<li>ts 的 class 可以作为类型使用，immer 结合 class 定义状态，结构清晰、类型友好：</li>
+</ol>
+<pre><code class="language-typescript">export class State {
+  [immerable] = true;
+
+  loading = true;
+  posts: Post[] = [];
+}
+
+function List() {
+    const [state, dispatch] = useImmer(() =&gt; new State());
+}
+</code></pre>
+<h3 id="2-与-react-无缝结合">2 与 React 无缝结合</h3>
+<ol>
+<li>上述的代码片段已经展示了使用 user-immer 管理组件的内部状态，简单方便；</li>
+<li>通过 React Context 在组件树中传递组件状态</li>
+</ol>
+<pre><code class="language-typescript">// 1. 创建 Context Ref
+const ModelContext = createContext&lt;{ state: State, dispatch }&gt;();
+
+// 2. 提供 State
+function Root() {
+    const [state, dispatch] = useImmer(() =&gt; new State());
+
+    return (
+        &lt;ModelContext.Provider value={{ state, dispatch }}&gt;
+            {children}
+        &lt;/StateRefContext.Provider&gt;
+    )
+}
+
+// 3. 定义 hooks
+export const useModel = () =&gt; useContext(ModelContext);
+
+// 4. 子组件访问
+function List() {
+    const model = useModel();
+
+    // model.state.loading
+}
+</code></pre>
+<ol start="3">
+<li>基于 immer 的不可变数据，diff 无心智负担</li>
+</ol>
+<pre><code class="language-typescript">function List() {
+    const model = useModel();
+
+    useEffect(() =&gt; {
+        // posts 发生变化
+    }, [model.state.posts])
+}
+</code></pre>
+<h3 id="3-灵活拓展使用场景">3 灵活拓展使用场景</h3>
+<ol>
+<li>纯函数风格的 Selector，Mutation</li>
+</ol>
+<pre><code class="language-typescript">import { immerable, produce } from 'immer';
+
+// 1. 定义状态
+export class State {
+  [immerable] = true;
+
+  loading = true;
+  posts: Post[] = [];
+
+  static set(state: State, recipe: (draft: State) =&gt; void) {
+    return produce(state, recipe);
+  }
+}
+
+// 2. 定义 Selector、Mutation
+const getPosts = (state: State) =&gt; model.posts
+const setPosts = (draft: State, posts: State['posts']) =&gt; {
+    draft.posts = posts
+}
+</code></pre>
+<ol start="2">
+<li>缓存 Selector 结果，避免不必要的渲染，提升性能</li>
+</ol>
+<pre><code class="language-typescript">// 3. 定义 useSelector 缓存结果，避免不
+function useSelector&lt;T&gt;(
+  selector: (state: State) =&gt; T,
+  deps: DependencyList = []
+): T {
+  const model = useModel();
+  const state = useModelState();
+
+  return useMemo(() =&gt; selector(state), [state, selector, ...deps]);
+}
+
+function Lists() {
+    const posts = useSelector(getPosts);
+}
+</code></pre>
+<ol start="3">
+<li>子组件驱动数据更新，满足复杂的业务场景</li>
+</ol>
+<pre><code class="language-typescript">function useDispatch() {
+    const model = useModel();
+    return useMemo(() =&gt; model.dispatch, [model.dispatch]);
+}
+
+function Lists() {
+    const posts = useSelector(getPosts);
+    const dispatch = useDispatch();
+
+    useEffect(() =&gt; {
+        getAllPosts().then(posts =&gt; {
+            dispatch(draft =&gt; setPosts(draft, posts))
+        })
+    }, [])
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%9C%BA%E6%99%AF">场景</a></li>
+<li><a href="#%E4%BC%98%E5%8A%BF">优势</a>
+<ul>
+<li><a href="#1-%E6%8E%A5%E8%BF%91%E5%8E%9F%E7%94%9F-js-%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C">1 接近原生 JS 的开发体验</a></li>
+<li><a href="#2-%E4%B8%8E-react-%E6%97%A0%E7%BC%9D%E7%BB%93%E5%90%88">2 与 React 无缝结合</a></li>
+<li><a href="#3-%E7%81%B5%E6%B4%BB%E6%8B%93%E5%B1%95%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">3 灵活拓展使用场景</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://youking.vsh.cc/post/honojs-zod-openapi/">
+              <h3 class="post-title">
+                构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'Ov23li7h6TuNCIKHdDPu',
+    clientSecret: '962bb5f5eb453ac33972d5f314fc3706e54b4c9c',
+    repo: 'youking-lib.github.io',
+    owner: 'youking-lib',
+    admin: ['youking-lib'],
+    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://youking.vsh.cc/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.highlightAll()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

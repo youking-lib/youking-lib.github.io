@@ -1,0 +1,408 @@
+<html>
+  <head>
+    <meta name="description" content="方案 &amp; 优势
+方案有以下优势：
+
+使用 turbo 进行依赖任务构建；
+使用 pnpm 快速高效的链接多个 Package；
+使用 Nextjs 全方位提升 React 开发体验，并提供轻量级的 API 服务；
+使用 tsup 处..." />
+    <meta name="keywords" content="tsup,commonjs,bundle" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>基于 trubo、pnpm、nextjs、tsup 的 monorepo 放题 | Youking</title>
+<link rel="shortcut icon" href="https://youking.vsh.cc/favicon.ico?v=1740048729188">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://youking.vsh.cc/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="基于 trubo、pnpm、nextjs、tsup 的 monorepo 放题 | Youking - Atom Feed" href="https://youking.vsh.cc/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQ7BTC5440"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQ7BTC5440');
+</script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://youking.vsh.cc">
+  <img class="avatar" src="https://youking.vsh.cc/images/avatar.png?v=1740048729188" alt="">
+  </a>
+  <h1 class="site-title">
+    Youking
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="https://youking-lib.github.io" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/youking-lib" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              基于 trubo、pnpm、nextjs、tsup 的 monorepo 放题
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-12-25
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://youking.vsh.cc/tag/9V9EMoZ4Qn/" class="post-tag">
+                  # tsup
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/V_jIErgO-sZ/" class="post-tag">
+                  # commonjs
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/2YW3TaifjND/" class="post-tag">
+                  # bundle
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="方案-优势">方案 &amp; 优势</h2>
+<p>方案有以下优势：</p>
+<ul>
+<li>使用 <a href="https://turbo.build/repo/docs">turbo</a> 进行依赖任务构建；</li>
+<li>使用 <a href="https://pnpm.io/installation">pnpm</a> 快速高效的链接多个 Package；</li>
+<li>使用 <a href="https://nextjs.org/docs">Nextjs</a> 全方位提升 React 开发体验，并提供轻量级的 API 服务；</li>
+<li>使用 <a href="https://tsup.egoist.dev/#install">tsup</a> 处理特殊场景的打包构建，如构建符合 commonjs 规范的包（Package）或捆绑文件（Bundle File）等。</li>
+</ul>
+<p>模版可以直接通过 turbo 的生成：</p>
+<pre><code class="language-shell">pnpm dlx create-turbo@latest
+</code></pre>
+<h2 id="关键行动">关键行动</h2>
+<h3 id="使用-turbo-进行依赖任务构建">使用 turbo 进行依赖任务构建</h3>
+<p>Nodejs 的依赖是一个有向无环图结构，使用 pnpm 以 monorepo 的方式组织源代码不可避免的出现依赖构建问题，以下方目录以及形成的依赖关系为例：</p>
+<ul>
+<li>构建 <code>apps/api</code> 之前先要构建 <code>packages/b</code></li>
+<li>修改 <code>packages/b</code> 要重新构建 <code>apps/api</code></li>
+</ul>
+<pre><code>project
+├── apps
+│   ├── api
+│   └── web
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── packages
+│   ├── a
+│   └── b
+└── turbo.json
+
+# 依赖关系
+web/node_modules/a/node_modues/b
+api/node_modules/a/node_modues/b
+</code></pre>
+<p>turbo 解决构建依赖问题仅需执行 <code>trubo run build --filter=api...</code> 这一简单命令。</p>
+<h3 id="使用-tsup-处理特殊场景的打包构建">使用 tsup 处理特殊场景的打包构建</h3>
+<p>需要单独打包的场景很多，本文主要介绍其中常见的两种，也是笔者经常使用 tsup 进行处理的：</p>
+<ul>
+<li>需要独立发布、部署的 JS Bundle 文件，如 SDK 等；</li>
+<li>遇到必须使用的旧版本 Package，要求必须在 Commonjs 规范的上下文；</li>
+</ul>
+<h4 id="竞品对比">竞品对比</h4>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>TSUP</th>
+<th>Vite</th>
+<th>Webpack</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构建速度</td>
+<td>基于 Esbuild，速度极快，处理中小项目瞬间完成</td>
+<td>开发模式下冷启动快，利用浏览器原生 ES 模块，热更新迅速</td>
+<td>相对较慢，需要分析整个项目模块，有优化策略可提升速度</td>
+</tr>
+<tr>
+<td>开发体验</td>
+<td>侧重于打包，简单直接，开发服务器功能少</td>
+<td>热更新功能强大，开发服务器支持多种配置，如代理，方便处理跨域</td>
+<td>配置插件和开发服务器后体验不错，但配置复杂，学习成本高</td>
+</tr>
+<tr>
+<td>生态系统和插件支持</td>
+<td>生态系统相对小，插件支持有限，能满足基本打包需求</td>
+<td>生态系统不断壮大，针对不同框架有插件，还有性能优化和开发体验相关插件</td>
+<td>生态系统庞大，几乎能找到满足任何需求的插件</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>适用于简单 TypeScript 项目，如注重快速打包的工具库、小型命令行工具等</td>
+<td>现代前端开发，基于 Vue、React 等框架的应用，对开发效率和热更新速度要求高</td>
+<td>复杂大型前端项目，需精细控制打包、深度优化和大量使用插件，对旧浏览器兼容性要求高</td>
+</tr>
+</tbody>
+</table>
+<h4 id="生成-commonjs-规范的-package">生成 Commonjs 规范的 Package</h4>
+<pre><code>project
+├── packages
+│   └── cjs-pkg
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── tsup.config.ts
+└── turbo.json
+</code></pre>
+<p>如以上的目录结构所示，使用 tsup 单独为 <code>cjs-pkg</code> 生成 Commonjs 规范的代码：</p>
+<ol>
+<li>定义 Commonjs 的 Package</li>
+</ol>
+<pre><code class="language-json">// project/packages/cjs-pkg/package.json
+{
+  &quot;name&quot;: &quot;vector-store&quot;,
+  &quot;type&quot;: &quot;commonjs&quot;,
+  &quot;main&quot;: &quot;./dist/index.js&quot;,
+  &quot;types&quot;: &quot;./src/index.ts&quot;,
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;tsup --watch&quot;,
+    &quot;build&quot;: &quot;tsup&quot;,
+  },
+  &quot;devDependencies&quot;: {
+      &quot;tsup&quot;: &quot;^8.3.0&quot;,
+  }
+}
+</code></pre>
+<ol start="2">
+<li>编写 tsup 的配置文件</li>
+</ol>
+<pre><code class="language-typescript">// // project/packages/cjs-pkg/tsup.config.ts
+import { defineConfig, Options } from 'tsup'
+
+export default defineConfig((options: Options) =&gt; ({
+  entry: ['src/index.ts'],
+  format: ['cjs'],
+  target: 'node18',
+  dts: false,
+  shims: true,
+  silent: true,
+  sourcemap: true,
+  ...options,
+}))
+</code></pre>
+<ol start="3">
+<li>运行 dev/build 命令编译输出结果</li>
+</ol>
+<h4 id="使用-tsup-打包构建-sdk">使用 tsup 打包构建 SDK</h4>
+<p>例如在 Shopify 的开发场景中，通常会提供一个 JS 的 SDK 包嵌入商店网站，使用 tsup 可以简单处理这种问题；</p>
+<ol>
+<li>以下面的目录结构为例，期望把 <code>packages/sdk</code> 打包为一个独立的 iife 文件</li>
+</ol>
+<pre><code>project
+├── packages
+│   └── sdk
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── tsup.config.ts
+└── turbo.json
+</code></pre>
+<ol start="2">
+<li>编写 tsup 配置文件</li>
+</ol>
+<pre><code class="language-typescript">// 导入环境变量
+import 'dotenv/config';
+
+export default defineConfig((options: Options) =&gt; ({
+  entry: {
+    index: './src/index.ts',
+    seed: './src/seed.ts'
+  },
+  outDir: './dist,
+  metafile: true,
+  format: ['iife'],
+  esbuildOptions(options) {
+    options.banner = {
+      js: '&quot;use client&quot;'
+    };
+  },
+  env: {
+    NODE_ENV: 'production',
+  },
+  minify: true,
+  ...options
+}));
+</code></pre>
+<p>tsup 的打包方案可以 Cover 住笔者的这两种经常用到的场景，如果有进一步需要定制的打包方案，可以考虑引入 Vite、Webpack。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E6%96%B9%E6%A1%88-%E4%BC%98%E5%8A%BF">方案 &amp; 优势</a></li>
+<li><a href="#%E5%85%B3%E9%94%AE%E8%A1%8C%E5%8A%A8">关键行动</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8-turbo-%E8%BF%9B%E8%A1%8C%E4%BE%9D%E8%B5%96%E4%BB%BB%E5%8A%A1%E6%9E%84%E5%BB%BA">使用 turbo 进行依赖任务构建</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8-tsup-%E5%A4%84%E7%90%86%E7%89%B9%E6%AE%8A%E5%9C%BA%E6%99%AF%E7%9A%84%E6%89%93%E5%8C%85%E6%9E%84%E5%BB%BA">使用 tsup 处理特殊场景的打包构建</a>
+<ul>
+<li><a href="#%E7%AB%9E%E5%93%81%E5%AF%B9%E6%AF%94">竞品对比</a></li>
+<li><a href="#%E7%94%9F%E6%88%90-commonjs-%E8%A7%84%E8%8C%83%E7%9A%84-package">生成 Commonjs 规范的 Package</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8-tsup-%E6%89%93%E5%8C%85%E6%9E%84%E5%BB%BA-sdk">使用 tsup 打包构建 SDK</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://youking.vsh.cc/post/about/">
+              <h3 class="post-title">
+                关于
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'Ov23li7h6TuNCIKHdDPu',
+    clientSecret: '962bb5f5eb453ac33972d5f314fc3706e54b4c9c',
+    repo: 'youking-lib.github.io',
+    owner: 'youking-lib',
+    admin: ['youking-lib'],
+    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://youking.vsh.cc/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.highlightAll()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

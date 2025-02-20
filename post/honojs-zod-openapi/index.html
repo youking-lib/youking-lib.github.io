@@ -1,0 +1,347 @@
+<html>
+  <head>
+    <meta name="description" content="方案
+
+Honojs 轻量服务框架，支持运行在各种平台，如 Cloudflare Worker、Vercel，支持继承到 Nextjs；
+@hono/zod-openapi 基于 Zodjs 定义 Swagger 接口
+@hono/swag..." />
+    <meta name="keywords" content="honojs,zod,openapi" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件 | Youking</title>
+<link rel="shortcut icon" href="https://youking.vsh.cc/favicon.ico?v=1740048729188">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://youking.vsh.cc/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件 | Youking - Atom Feed" href="https://youking.vsh.cc/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQ7BTC5440"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQ7BTC5440');
+</script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://youking.vsh.cc">
+  <img class="avatar" src="https://youking.vsh.cc/images/avatar.png?v=1740048729188" alt="">
+  </a>
+  <h1 class="site-title">
+    Youking
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="https://youking-lib.github.io" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/youking-lib" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-12-26
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://youking.vsh.cc/tag/-TmFK-NepB/" class="post-tag">
+                  # honojs
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/Aw0y5_e_0VK/" class="post-tag">
+                  # zod
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/cGFgHaWkTJP/" class="post-tag">
+                  # openapi
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="方案">方案</h2>
+<ul>
+<li><a href="https://hono.dev/docs/getting-started/basic">Honojs</a> 轻量服务框架，支持运行在各种平台，如 Cloudflare Worker、Vercel，支持继承到 Nextjs；</li>
+<li><a href="https://hono.dev/examples/zod-openapi">@hono/zod-openapi</a> 基于 Zodjs 定义 Swagger 接口</li>
+<li><a href="https://hono.dev/examples/swagger-ui">@hono/swagger-ui</a> 生成 Swagger 接口文档</li>
+<li>使用 <a href="https://github.com/acacode/swagger-typescript-api">swagger-typescript-api</a> 生成 ts 接口文件</li>
+</ul>
+<h2 id="优势">优势</h2>
+<ul>
+<li>输出规范的 Swagger 接口文档，支持代码生成；</li>
+<li>基于 zodjs 生成的 schema，自动的数据校验与类型推导；</li>
+<li>基于轻量级的 Honojs 框架，相同的代码支持在所有平台运行；</li>
+</ul>
+<h4 id="实现">实现</h4>
+<ol>
+<li>使用 zod-openapi 定义一个 OpenAPI 路由</li>
+</ol>
+<pre><code class="language-typescript">// route.schema.ts
+export const ShopProfile = z.object({
+  id: z.string(),
+  shop: z.string(),
+  title: z.string()
+}).openapi('ShopProfileVo', {
+  description: '商店详情'
+});
+
+export const GetShopProfileRoute = createRoute({
+  tags: ['Shop'],
+  method: 'get',
+  path: '/shop/{shopId}',
+  request: {
+    params: z.object({
+      shopId: z.string()
+    })
+  },
+  responses: {
+    200: {
+      content: {
+        'application/json': {
+          schema: ShopProfile
+        }
+      },
+      description: 'GetShopProfileRoute'
+    }
+  }
+});
+</code></pre>
+<ol start="2">
+<li>根据路由 Schema 实现路由</li>
+</ol>
+<pre><code class="language-typescript">import { OpenAPIHono } from '@hono/zod-openapi'
+import { GetShopProfileRoute } from './route.schema.ts'
+
+const api = new OpenAPIHono();
+
+api.openapi(GetShopProfileRoute, async c =&gt; {
+    const { shopId } = c.valid('params');
+
+    const shopProfile = await prisma.ShopProfile.findUnique({
+        where: {
+            id: shopId
+        }
+    })
+
+    return c.json(shopProfile, 200)
+})
+</code></pre>
+<ol start="3">
+<li>生成 Swagger 文件</li>
+</ol>
+<pre><code class="language-typescript">api.doc('/swagger/doc', (c) =&gt; {
+    return {
+        openapi: '3.1.0',
+        servers: [
+            {
+                url: new URL(c.req.url).origin,
+                description: 'Current environment',
+            },
+        ],
+        info: {
+            version: '0.0.1',
+            title: 'asp-api',
+            description: 'asp-api swagger',
+        },
+    }
+})
+</code></pre>
+<ol start="4">
+<li>[可选] 使用 swagger-ui 渲染接口文档</li>
+</ol>
+<pre><code class="language-typescript">
+api.get('/swagger/ui', swaggerUI({
+    url: '/api/swagger/doc',
+    persistAuthorization: true
+}))
+</code></pre>
+<ol start="5">
+<li>使用 <a href="https://github.com/acacode/swagger-typescript-api">swagger-typescript-api</a> 生成 ts 接口文件</li>
+</ol>
+<pre><code class="language-typescript">// generate.ts
+// tsx ./generate.ts
+import { generateApi } from 'swagger-typescript-api'
+
+gen();
+
+async function gen() {
+    await generateApi({
+        name: 'index.ts',
+        output: path.resolve(__dirname, 'gen', './api'),
+        url: 'http://127.0.0.1:3010/api/swagger/doc',
+    })
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E6%96%B9%E6%A1%88">方案</a></li>
+<li><a href="#%E4%BC%98%E5%8A%BF">优势</a><br>
+*
+<ul>
+<li><a href="#%E5%AE%9E%E7%8E%B0">实现</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://youking.vsh.cc/post/prisma-guide/">
+              <h3 class="post-title">
+                ORM 为什么选择 Prismajs
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'Ov23li7h6TuNCIKHdDPu',
+    clientSecret: '962bb5f5eb453ac33972d5f314fc3706e54b4c9c',
+    repo: 'youking-lib.github.io',
+    owner: 'youking-lib',
+    admin: ['youking-lib'],
+    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://youking.vsh.cc/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.highlightAll()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

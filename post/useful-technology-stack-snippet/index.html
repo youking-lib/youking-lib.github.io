@@ -1,0 +1,500 @@
+<html>
+  <head>
+    <meta name="description" content="前言
+你有没有那么一天突然灵光一现，脑海里出现一个非常有意思的 Idea，并且想要将它实现出来；
+然后你满怀激情的筹备时，却发现这个过程并不顺利。首当其冲的就是手头没有趁手的工具，或是
+花费大量时间学习新工具，却遇到各种各样的难点和坑点；
+..." />
+    <meta name="keywords" content="Fullstack,独立开发" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>独立开发技术栈  2024 年度总结 | Youking</title>
+<link rel="shortcut icon" href="https://youking.vsh.cc/favicon.ico?v=1740048729188">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://youking.vsh.cc/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="独立开发技术栈  2024 年度总结 | Youking - Atom Feed" href="https://youking.vsh.cc/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQ7BTC5440"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQ7BTC5440');
+</script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://youking.vsh.cc">
+  <img class="avatar" src="https://youking.vsh.cc/images/avatar.png?v=1740048729188" alt="">
+  </a>
+  <h1 class="site-title">
+    Youking
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="https://youking-lib.github.io" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/youking-lib" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              独立开发技术栈  2024 年度总结
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-12-27
+              </span>
+              <span>
+                9 min read
+              </span>
+              
+                <a href="https://youking.vsh.cc/tag/CUEW7tPrIb/" class="post-tag">
+                  # Fullstack
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/URG_fnM_eG_/" class="post-tag">
+                  # 独立开发
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://youking.vsh.cc/post-images/useful-technology-stack-snippet.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="前言">前言</h2>
+<p>你有没有那么一天突然灵光一现，脑海里出现一个非常有意思的 Idea，并且想要将它实现出来；</p>
+<p>然后你满怀激情的筹备时，却发现这个过程并不顺利。首当其冲的就是手头没有趁手的工具，或是<br>
+花费大量时间学习新工具，却遇到各种各样的难点和坑点；</p>
+<p>于是这个 Idea 就被搁置，像是掩埋在尘埃里的一颗种子...</p>
+<p>以上是笔者曾经 “无数次成为独立开发者” 的心路历程，因此本文记录一下迈过这个阶段之后的总结与沉淀。</p>
+<h2 id="如何选择适合自己的技术栈">如何选择适合自己的技术栈？</h2>
+<p>参考以下几个角度：</p>
+<ul>
+<li>技术选型的目的或原则是降本提效，脱离这个原则的选型都是不负责任的；</li>
+<li>从自身角度选择自己最熟悉的技术栈，减少学习成本、时间成本，聚焦于快速实现产品功能；</li>
+<li>从社区角度选取成熟稳定的产品服务，选择成本较低的方案；</li>
+</ul>
+<p>时间和钱是最大的成本，以下是几个反例：</p>
+<ul>
+<li>产品还没发布上线，已经重构了好几遍；</li>
+<li>还没实现功能，先买了一堆域名；</li>
+<li>产品没有几个用户已经考虑优化极致的网络体验；</li>
+</ul>
+<p>笔者也是踩了很多坑才总结出一套当下自己趁手的工具，后续也会持续更新，毕竟这只是当下的教训反思，看似完美的工具罢了 🤡。</p>
+<h2 id="整体方案">整体方案</h2>
+<p>前端</p>
+<ul>
+<li>框架：<a href="https://react.dev/">React</a></li>
+<li>打包编译：<a href="https://nextjs.org/docs">Nextjs</a>、<a href="https://tsup.egoist.dev/#install">tsup</a></li>
+<li>包管理：<a href="https://pnpm.io/installation">pnpm</a>、<a href="https://turbo.build/repo/docs">turbo</a></li>
+<li>UI： <a href="https://www.radix-ui.com/themes/docs/overview/getting-started">@radix-ui</a>、<a href="https://tailwindcss.com/docs/installation">tailwind</a>、<a href="https://ui.shadcn.com/">shacn-ui</a></li>
+<li>状态管理：<a href="https://immerjs.github.io/immer/zh-CN/example-setstate">use-immer</a></li>
+</ul>
+<p>后端：</p>
+<ul>
+<li>框架：<a href="https://hono.dev/docs/getting-started/basic">Honojs</a>、<a href="https://nextjs.org/docs">Nextjs</a></li>
+<li>OpenAPI：@hono/zod-openapi、@hono/swagger-ui、swagger-typescript-api（TS 接口文件生成），<a href="https://youking-lib.github.io/post/honojs-zod-openapi/">查看方案 OpenAPI 实现方案</a></li>
+<li>数据库：<a href="https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma">Prisma</a>、<a href="https://developers.cloudflare.com/d1/">Cloudflare D1</a></li>
+<li>邮件
+<ul>
+<li>国外：<a href="https://www.useplunk.com/">Plunk（开源）</a>、<a href="https://resend.com/">Resend</a></li>
+<li>国内：飞书邮件 + <a href="https://www.nodemailer.com/">nodemailer</a> + <a href="https://react.email/docs/introduction">react-email（邮件模版）</a></li>
+</ul>
+</li>
+<li>统计：<a href="https://umami.is/">umami（开源）</a>、<a href="https://marketingplatform.google.com/about/analytics/">Google Analytics</a></li>
+<li>鉴权：<a href="https://clerk.com/">Clerk SAAS</a>、<a href="https://www.npmjs.com/package/jose">jose JWT</a></li>
+</ul>
+<p>AI：</p>
+<ul>
+<li>SDK：<a href="https://sdk.vercel.ai/docs/introduction">Vercel AI SDK</a></li>
+<li>Provider：<a href="https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/#pricing">Azure OpenAI</a>、<a href="https://developers.cloudflare.com/workers-ai/">Cloudflare AI</a>、<a href="https://help.aliyun.com/zh/model-studio/getting-started/what-is-model-studio?spm=5176.29619931.J_AHgvE-XDhTWrtotIBlDQQ.13.7efa59fceyn3Vq#1a407ae2caj33">Ali 通义（国内）</a></li>
+<li>Vector DB：<a href="https://developers.cloudflare.com/vectorize/">Cloudlfare Vector</a>、<a href="https://milvus.io/docs/architecture_overview.md">Milvus</a></li>
+</ul>
+<p>运维：</p>
+<ul>
+<li>部署：<a href="https://developers.cloudflare.com/pages/">Cloudlare Worker/Pages</a>、<a href="https://pm2.keymetrics.io/docs/usage/quick-start/">PM2</a>、<a href="https://docs.docker.com/engine/install/">Docker</a></li>
+<li>HTTPS：<a href="https://caddyserver.com/docs/install">Caddy</a></li>
+<li>域名 DNS：<a href="https://www.cloudflare.com/">Cloudlfare</a></li>
+</ul>
+<blockquote>
+<p>基于成本考量，服务部署首选 Cloudflare Worker，如受限于技术问题 Worker 无法支持，可以选择一个低成本的服务器，用于部署 PM2、Docker 等服务</p>
+</blockquote>
+<p>Docker 服务，参考 <a href="https://youking-lib.github.io/post/usefull-docker-compose-configs/">使用 Docker Compose 快速部署常用的服务</a></p>
+<ul>
+<li>[SAAS] Dify https://dify.ai/</li>
+<li>[SAAS] Umami https://umami.is/</li>
+<li>[SAAS] Flowise AI https://flowiseai.com/</li>
+<li>[SAAS] Firecrawl 爬虫  https://www.firecrawl.dev/</li>
+<li>[数据库] Mysql</li>
+<li>[数据库] MongoDB</li>
+<li>[数据库] Milvus</li>
+<li>[数据库] Neo4j</li>
+<li>[中间件] Kafka</li>
+</ul>
+<p>Common Package：</p>
+<ul>
+<li><a href="https://zod.dev/">zodjs</a>：数据校验、TS 类型推导；</li>
+<li><a href="https://tsx.is/">tsx</a>：直接运行 ts/tsx 文件，快速 debug；</li>
+<li><a href="https://vitest.dev/">vitest</a>：单元测试框架 jest 的完美替代 ，再也不用关心 ES 模块与 TS 编译问题；</li>
+<li><a href="https://github.com/ai/nanoid">nanoid</a>：UUID 生成；</li>
+</ul>
+<h2 id="前端">前端</h2>
+<h3 id="基于-trubo-pnpm-nextjs-tsup-的多包方案">基于 trubo、pnpm、nextjs、tsup 的多包方案</h3>
+<p>一整年下来，最趁手的就是该多包方案：</p>
+<ul>
+<li>使用 <a href="https://turbo.build/repo/docs">turbo</a> 自动的进行依赖任务构建；</li>
+<li>使用 <a href="https://pnpm.io/installation">pnpm</a> 快速高效的链接多个 Pakcage；</li>
+<li>使用 <a href="https://nextjs.org/docs">Nextjs</a> 提升全方面提升 React 开发体验，并提供轻量级的 API 服务；</li>
+<li>使用 <a href="https://tsup.egoist.dev/#install">tsup</a> 处理特殊场景的打包构建，如构建符合 commonjs 规范的包（Package）、打包文件（Bundle File）；</li>
+</ul>
+<p>参考 <a href="https://youking-lib.github.io/post/turbo-monorepo-buffet/">基于 trubo、pnpm、nextjs、tsup 的 monorepo 放题</a> 深入了解。</p>
+<h3 id="ui-库的最佳实践">UI 库的最佳实践</h3>
+<p>UI 库的选型优先选择自己最熟悉擅长的轮子，如果想想要尝鲜或突破，可参考以下选型：</p>
+<ul>
+<li>首选 <a href="https://www.radix-ui.com/themes/docs/overview/getting-started">@radix-ui</a> 不需要额外配置，安装包后直接使用；</li>
+<li>对于较为复杂的排版场景、AI 生成的代码模版，使用 <a href="https://tailwindcss.com/docs/installation">tailwind</a>；</li>
+<li>@radix-ui 提供的组件并不算丰富，还可以选择 <a href="https://ui.shadcn.com/">shacn-ui</a>、<a href="https://www.chakra-ui.com/">chakraui</a> 等</li>
+</ul>
+<p>绝大部分场景可以直接使用 @radix-ui 组件提供的 props 进行排版：</p>
+<pre><code class="language-typescript">function RadixUI() {
+    return (
+        &lt;Flex mt=&quot;2&quot;&gt;&lt;Flex&gt;
+    )
+}
+
+function TailwindUI() {
+    return (
+        &lt;div className=&quot;flex mt-2&quot;&gt;&lt;/div&gt;
+    )
+}
+</code></pre>
+<p>参考：</p>
+<ul>
+<li><a href="https://github.com/radix-ui/themes/issues/109#issuecomment-1747345743">@radix-ui 与 tailwind 组合使用</a></li>
+</ul>
+<h3 id="史上最简单高效的状态管理">史上最简单高效的状态管理</h3>
+<p>在 Nextjs 环境中，完全脱离状态管理库（SWR、Server Action 等方案）又不是很方便，而引入 zustand、redux 等库又太重。</p>
+<p>使用 user-immer 渐进式的解决简单组件内部状态管理、复杂的业务组件状态管理，甚至是整个应用的状态管理，优势如下：</p>
+<ul>
+<li>[接近原生 JS 的开发体验] 使用接近 js 原生对象的风格操作不可变数据，引入的概念少；</li>
+<li>[与 React 无缝结合] 与 react 结合，状态变更可预测，调试友好，diff 变更时不会造成心智负担；</li>
+<li>[灵活拓展] 按需拓展场景，如 Selector、Mutation 等，状态流转白盒化；</li>
+</ul>
+<p>体验示例如下，可以参考 <a href="https://youking-lib.github.io/post/use-immer-state-manager/">史上最简单高效的状态管理<br>
+</a> 了解更多：</p>
+<pre><code class="language-typescript">function Lists() {
+    const posts = useSelector(getPosts);
+    const dispatch = useDispatch();
+
+    useEffect(() =&gt; {
+        getAllPosts().then(posts =&gt; {
+            dispatch(draft =&gt; setPosts(draft, posts))
+        })
+    }, [])
+}
+</code></pre>
+<h2 id="后端">后端</h2>
+<h3 id="构建类型安全的-api-接口-openapi-自动成-ts-接口文件">构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件</h3>
+<ol>
+<li>方案</li>
+</ol>
+<ul>
+<li><a href="https://hono.dev/docs/getting-started/basic">Honojs</a> 轻量服务框架，支持运行在各种平台，如 Cloudflare Worker、Vercel，支持集成到 Nextjs；</li>
+<li><a href="https://hono.dev/examples/zod-openapi">@hono/zod-openapi</a> 基于 Zodjs 定义 Swagger 接口</li>
+<li><a href="https://hono.dev/examples/swagger-ui">@hono/swagger-ui</a> 生成 Swagger 接口文档</li>
+<li><a href="https://github.com/acacode/swagger-typescript-api">swagger-typescript-api</a> 生成 ts 接口文件</li>
+</ul>
+<ol start="2">
+<li>优势</li>
+</ol>
+<ul>
+<li>输出规范的 Swagger 接口文档，支持代码生成；</li>
+<li>基于 zodjs 生成的 schema，自动的数据校验与类型推导；</li>
+<li>基于轻量级的 Honojs 框架，相同的代码支持在所有平台运行；</li>
+</ul>
+<p>参考 <a href="https://youking-lib.github.io/post/honojs-zod-openapi/">构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件</a> 了解具体实现</p>
+<h3 id="orm-为什么选择-prisma">ORM 为什么选择 Prisma？</h3>
+<p>prisma 的优势如下：</p>
+<ol>
+<li>基于面向对象的查询接口，灵活且流畅，TS 类型推导非常严谨安全；</li>
+<li>支持多种数据库，如 MySQL、PostgreSQL、CloudFlare D1、MongoDB 等，完美适应不同团队、项目的选型偏好，即使你没有 SQL 语法的使用经验；</li>
+<li>清晰的数据模型定义 DSL、完整的迁移同步工具、丰富的文档与强大的社区；</li>
+<li>支持 Cloudflare D1！</li>
+</ol>
+<p>以下是 Prisma 的使用场景，感受一下 Prisma 的便捷性：</p>
+<ol>
+<li>关联数据创建场景：初始化项目以及项目的管理员</li>
+</ol>
+<pre><code class="language-typescript">const project = await prisma.project.create({
+    data: {
+        title: 'default project',
+        owner: {
+            create: {
+                username: '管理员'
+            }
+        }
+    }
+})
+</code></pre>
+<ol start="2">
+<li>关联查询场景：查询项目详情并关联出管理员信息</li>
+</ol>
+<pre><code class="language-typescript">// 关联查询
+function getProject(id: string) {
+    return prisma.project.findUnique({
+        where: {
+            id
+        },
+        include: {
+            owner: true,
+        }
+    })
+}
+</code></pre>
+<p>Prisma 还支持 Cloudflare D1 以及 自动生成 zodjs 文件，参考这篇文章 <a href="https://youking-lib.github.io/post/prisma-guide/">ORM 为什么选择 Prismajs</a></p>
+<h3 id="零成本定制邮件模块">零成本定制邮件模块</h3>
+<p>有两种常用邮件发送的方式：</p>
+<ol>
+<li>域名解析到邮件 Saas 服务，如 <a href="https://resend.com/">Resend</a>、<a href="https://www.useplunk.com/">Plunk</a> 等，推荐 Plunk，开源且支持独立部署；</li>
+<li>SMTP + nodemailer</li>
+</ol>
+<p>笔者使用的是方式二，因为已经将邮件托管到了飞书，选择自己写了一个独立的邮件 OpenAPI 服务，参考 <a href="https://youking-lib.github.io/post/send-email/">结合 react-email 零成本定制邮件系统</a></p>
+<h3 id="ai-比-langchainjs-更好用的-ai-sdk">[AI] 比 langchainjs 更好用的 AI SDK</h3>
+<p>如果深入用过的 langchainjs 的话，你肯定也会骂它很多遍，很多包不面向源代码编程，是跑不起来的，因此只适合参考实现逻辑；</p>
+<p>体验最好的是 Vercel 家的 <a href="https://sdk.vercel.ai/docs/introduction">SDK</a>，优势如下：</p>
+<ul>
+<li>支持不同的模型提供商，如 Azure、Cloudflare 等；</li>
+<li>使用 zodjs 约定模型输入输出的数据模型，完善的类型推导；</li>
+<li>完善的流式传输支持</li>
+</ul>
+<p>配置 Nextjs 实现大模型的调用、Function Call 功能以及流式传输，只需要几行代码：</p>
+<pre><code class="language-typescript">// nextjs api/chat/route.ts
+export async function POST() {
+    cosnt res = await streamText({
+        model,
+        prompt: '提醒我明天上午上班',
+        tools: {
+            createTool
+        }
+    })
+
+    return res.toDataStreamResponse();
+}
+</code></pre>
+<p>更多请参考这篇文章 <a href="https://youking-lib.github.io/post/ai-sdk-guide/">比 langchainjs 更好用的 AI SDK</a></p>
+<h2 id="运维">运维</h2>
+<h3 id="caddy-轻松代替-nginx">Caddy - 轻松代替 Nginx</h3>
+<p>Caddy 的优势体现在：</p>
+<ul>
+<li>安装使用非常简单，配置文件简洁易读</li>
+<li>自动 HTTPS，证书自动更新</li>
+</ul>
+<p>HTTPS 证书的自动化是最省心的功能，安装 Caddy 之后，你只需要作如下的配置，就可以实现 HTTPS 无忧了：</p>
+<pre><code class="language-yml"># Caddyfile
+app.domain.com {
+        reverse_proxy :3000 {
+                header_up Host {host} # redundant
+        }
+}
+</code></pre>
+<p>详细用法参考这篇文章：<a href="https://youking-lib.github.io/post/caddy-guide/">使用 Caddy 轻松代替 Nginx，实现 HTTPS 自动续杯！</a></p>
+<h3 id="使用-docker-compose-快速部署常用的服务">使用 Docker Compose 快速部署常用的服务</h3>
+<p>虽然 Cloudflare 已经提供了大部分免费服务，但仍有一些业务无法支持，比如想要部署一个 mysql 服务、独立部署一套开源的 SAAS 服务</p>
+<p>详细请参考这篇文章：<a href="https://youking-lib.github.io/post/usefull-docker-compose-configs/">使用 Docker Compose 快速部署常用的服务</a> 安装如下你可能会用到的容器服务：</p>
+<ul>
+<li>[SAAS] Dify https://dify.ai/</li>
+<li>[SAAS] Umami https://umami.is/</li>
+<li>[SAAS] Flowise AI https://flowiseai.com/</li>
+<li>[SAAS] Firecrawl 爬虫  https://www.firecrawl.dev/</li>
+<li>[数据库] Mysql</li>
+<li>[数据库] MongoDB</li>
+<li>[数据库] Milvus</li>
+<li>[数据库] Neo4j</li>
+<li>[中间件] Kafka</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88">如何选择适合自己的技术栈？</a></li>
+<li><a href="#%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88">整体方案</a></li>
+<li><a href="#%E5%89%8D%E7%AB%AF">前端</a>
+<ul>
+<li><a href="#%E5%9F%BA%E4%BA%8E-trubo-pnpm-nextjs-tsup-%E7%9A%84%E5%A4%9A%E5%8C%85%E6%96%B9%E6%A1%88">基于 trubo、pnpm、nextjs、tsup 的多包方案</a></li>
+<li><a href="#ui-%E5%BA%93%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">UI 库的最佳实践</a></li>
+<li><a href="#%E5%8F%B2%E4%B8%8A%E6%9C%80%E7%AE%80%E5%8D%95%E9%AB%98%E6%95%88%E7%9A%84%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86">史上最简单高效的状态管理</a></li>
+</ul>
+</li>
+<li><a href="#%E5%90%8E%E7%AB%AF">后端</a>
+<ul>
+<li><a href="#%E6%9E%84%E5%BB%BA%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84-api-%E6%8E%A5%E5%8F%A3-openapi-%E8%87%AA%E5%8A%A8%E6%88%90-ts-%E6%8E%A5%E5%8F%A3%E6%96%87%E4%BB%B6">构建类型安全的 API 接口 - OpenAPI 自动成 TS 接口文件</a></li>
+<li><a href="#orm-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-prisma">ORM 为什么选择 Prisma？</a></li>
+<li><a href="#%E9%9B%B6%E6%88%90%E6%9C%AC%E5%AE%9A%E5%88%B6%E9%82%AE%E4%BB%B6%E6%A8%A1%E5%9D%97">零成本定制邮件模块</a></li>
+<li><a href="#ai-%E6%AF%94-langchainjs-%E6%9B%B4%E5%A5%BD%E7%94%A8%E7%9A%84-ai-sdk">[AI] 比 langchainjs 更好用的 AI SDK</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%90%E7%BB%B4">运维</a>
+<ul>
+<li><a href="#caddy-%E8%BD%BB%E6%9D%BE%E4%BB%A3%E6%9B%BF-nginx">Caddy - 轻松代替 Nginx</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8-docker-compose-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%E5%B8%B8%E7%94%A8%E7%9A%84%E6%9C%8D%E5%8A%A1">使用 Docker Compose 快速部署常用的服务</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://youking.vsh.cc/post/use-immer-state-manager/">
+              <h3 class="post-title">
+                史上最简单高效的状态管理
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'Ov23li7h6TuNCIKHdDPu',
+    clientSecret: '962bb5f5eb453ac33972d5f314fc3706e54b4c9c',
+    repo: 'youking-lib.github.io',
+    owner: 'youking-lib',
+    admin: ['youking-lib'],
+    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://youking.vsh.cc/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.highlightAll()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

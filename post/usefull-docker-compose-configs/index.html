@@ -1,0 +1,762 @@
+<html>
+  <head>
+    <meta name="description" content="前言
+
+按照 官方文档 安装 docker
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+
+安装图形化的管理面板 portainer
+
+..." />
+    <meta name="keywords" content="caddy,docker-compose,docker" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>使用 Docker Compose 快速部署常用的服务 | Youking</title>
+<link rel="shortcut icon" href="https://youking.vsh.cc/favicon.ico?v=1740048729188">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://youking.vsh.cc/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="使用 Docker Compose 快速部署常用的服务 | Youking - Atom Feed" href="https://youking.vsh.cc/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQ7BTC5440"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQ7BTC5440');
+</script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://youking.vsh.cc">
+  <img class="avatar" src="https://youking.vsh.cc/images/avatar.png?v=1740048729188" alt="">
+  </a>
+  <h1 class="site-title">
+    Youking
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="https://youking-lib.github.io" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/youking-lib" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              使用 Docker Compose 快速部署常用的服务
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-12-26
+              </span>
+              <span>
+                10 min read
+              </span>
+              
+                <a href="https://youking.vsh.cc/tag/Q1CK-X_Ez8/" class="post-tag">
+                  # caddy
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/9x7H8Gncxjq/" class="post-tag">
+                  # docker-compose
+                </a>
+              
+                <a href="https://youking.vsh.cc/tag/3ZXAps3t8e/" class="post-tag">
+                  # docker
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="前言">前言</h2>
+<ol>
+<li>按照 <a href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository">官方文档</a> 安装 docker</li>
+</ol>
+<pre><code class="language-shell">curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+</code></pre>
+<ol start="2">
+<li><a href="https://docs.portainer.io/start/install/server/docker/linux">安装图形化的管理面板 portainer</a></li>
+</ol>
+<h2 id="常用指令">常用指令</h2>
+<ol>
+<li>启动服务</li>
+</ol>
+<pre><code class="language-shell">cd ~/apps/mysql/docker-compose.yml
+docker compose up -d
+</code></pre>
+<ol start="2">
+<li>停用服务</li>
+</ol>
+<pre><code class="language-shell">cd ~/apps/mysql/docker-compose.yml
+docker down
+</code></pre>
+<ol start="3">
+<li>查看容器日志</li>
+</ol>
+<pre><code class="language-shell">docker container ls
+docker logs [id]
+</code></pre>
+<ol start="4">
+<li>进入容器</li>
+</ol>
+<pre><code class="language-shell">docker exec [id] -it /bin/bash
+</code></pre>
+<h2 id="常用配置一览">常用配置一览</h2>
+<p>笔者习惯将 Volume 目录放到 <code>docker-compose.yml</code> 同级目录下，方便管理，因此会作形如下面的配置：</p>
+<pre><code class="language-yml">services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mysql/confs:/etc/mysql
+</code></pre>
+<h3 id="saas-dify">[SAAS] Dify</h3>
+<ol>
+<li><a href="https://docs.dify.ai/zh-hans/getting-started/install-self-hosted/docker-compose">部署文档</a></li>
+<li>修改 <code>.env</code> 文件，部署监听在非 80 端口</li>
+</ol>
+<pre><code class="language-env">EXPOSE_NGINX_PORT=8001
+</code></pre>
+<ol start="3">
+<li>使用 Caddy 方向代理</li>
+</ol>
+<pre><code class="language-yml">dify.yourdomain.com {
+        reverse_proxy :8001 {
+                header_up Host {host} # redundant
+                header_up X-Real-IP {remote}
+                header_up X-Forwarded-Port {server_port} # redundant
+        }
+}
+</code></pre>
+<h3 id="saas-umami">[SAAS] Umami</h3>
+<ol>
+<li>配置文件</li>
+</ol>
+<pre><code class="language-yml"># apps/umami/docker-compose.yml
+services:
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    ports:
+      - &quot;3000:3000&quot;
+    environment:
+      DATABASE_URL: postgresql://umami:umami@db:5432/umami
+      DATABASE_TYPE: postgresql
+      APP_SECRET: replace-me-with-a-random-string
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    healthcheck:
+      test: [&quot;CMD-SHELL&quot;, &quot;curl http://localhost:3000/api/heartbeat&quot;]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: umami
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/umami/data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: [&quot;CMD-SHELL&quot;, &quot;pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}&quot;]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  umami-db-data
+</code></pre>
+<ol start="2">
+<li>使用 Caddy 反向代理</li>
+</ol>
+<pre><code class="language-yml">umami.yourdomain.com {
+        reverse_proxy :3000 {
+                header_up Host {host} # redundant
+        }
+}
+</code></pre>
+<h3 id="saas-flowise-ai">[SAAS] Flowise AI</h3>
+<pre><code class="language-yml"># apps/flowise/docker-compose.yml
+services:
+    flowise:
+        image: flowiseai/flowise
+        restart: always
+        environment:
+            - PORT=${PORT}
+            - CORS_ORIGINS=${CORS_ORIGINS}
+            - IFRAME_ORIGINS=${IFRAME_ORIGINS}
+            - FLOWISE_USERNAME=${FLOWISE_USERNAME}
+            - FLOWISE_PASSWORD=${FLOWISE_PASSWORD}
+            - FLOWISE_FILE_SIZE_LIMIT=${FLOWISE_FILE_SIZE_LIMIT}
+            - DEBUG=${DEBUG}
+            - DATABASE_PATH=${DATABASE_PATH}
+            - DATABASE_TYPE=${DATABASE_TYPE}
+            - DATABASE_PORT=${DATABASE_PORT}
+            - DATABASE_HOST=${DATABASE_HOST}
+            - DATABASE_NAME=${DATABASE_NAME}
+            - DATABASE_USER=${DATABASE_USER}
+            - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+            - DATABASE_SSL=${DATABASE_SSL}
+            - DATABASE_SSL_KEY_BASE64=${DATABASE_SSL_KEY_BASE64}
+            - APIKEY_PATH=${APIKEY_PATH}
+            - SECRETKEY_PATH=${SECRETKEY_PATH}
+            - FLOWISE_SECRETKEY_OVERWRITE=${FLOWISE_SECRETKEY_OVERWRITE}
+            - LOG_LEVEL=${LOG_LEVEL}
+            - LOG_PATH=${LOG_PATH}
+            - BLOB_STORAGE_PATH=${BLOB_STORAGE_PATH}
+            - DISABLE_FLOWISE_TELEMETRY=${DISABLE_FLOWISE_TELEMETRY}
+            - MODEL_LIST_CONFIG_JSON=${MODEL_LIST_CONFIG_JSON}
+        ports:
+            - '${PORT}:${PORT}'
+        volumes:
+            - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/flowise:/root/.flowise
+        entrypoint: /bin/sh -c &quot;sleep 3; flowise start&quot;
+</code></pre>
+<h3 id="saas-firecrawl-爬虫">[SAAS] Firecrawl 爬虫</h3>
+<ol>
+<li>克隆仓库 <code>gitl clone git@github.com:mendableai/firecrawl.git</code></li>
+<li>修改 <code>docker-compose.yml</code> 文件</li>
+</ol>
+<pre><code class="language-yml">name: firecrawl
+
+x-common-service: &amp;common-service
+  build: 
+    context: apps/api
+    args:
+      - http_proxy=http://10.74.176.8:11080
+      - https_proxy=http://10.74.176.8:11080
+  networks:
+    - backend
+  extra_hosts:
+    - &quot;host.docker.internal:host-gateway&quot;
+
+services:
+  playwright-service:
+    build: 
+      context: apps/playwright-service-ts
+      args:
+        - http_proxy=http://10.74.176.8:11080
+        - https_proxy=http://10.74.176.8:11080
+    environment:
+      - PORT=3003
+      - PROXY_SERVER=${PROXY_SERVER}
+      - PROXY_USERNAME=${PROXY_USERNAME}
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
+      - BLOCK_MEDIA=${BLOCK_MEDIA}
+    ports:
+      - &quot;3003:3003&quot;
+    networks:
+      - backend
+
+  api:
+    &lt;&lt;: *common-service
+    environment:
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      REDIS_RATE_LIMIT_URL: ${REDIS_URL:-redis://redis:6379}
+      PLAYWRIGHT_MICROSERVICE_URL: ${PLAYWRIGHT_MICROSERVICE_URL:-http://playwright-service:3000}
+      USE_DB_AUTHENTICATION: ${USE_DB_AUTHENTICATION}
+      PORT: ${PORT:-3002}
+      NUM_WORKERS_PER_QUEUE: ${NUM_WORKERS_PER_QUEUE}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+      MODEL_NAME: ${MODEL_NAME:-gpt-4o}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+      LLAMAPARSE_API_KEY: ${LLAMAPARSE_API_KEY}
+      LOGTAIL_KEY: ${LOGTAIL_KEY}
+      BULL_AUTH_KEY: ${BULL_AUTH_KEY}
+      TEST_API_KEY: ${TEST_API_KEY}
+      POSTHOG_API_KEY: ${POSTHOG_API_KEY}
+      POSTHOG_HOST: ${POSTHOG_HOST}
+      SUPABASE_ANON_TOKEN: ${SUPABASE_ANON_TOKEN}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_TOKEN: ${SUPABASE_SERVICE_TOKEN}
+      SCRAPING_BEE_API_KEY: ${SCRAPING_BEE_API_KEY}
+      HOST: ${HOST:-0.0.0.0}
+      SELF_HOSTED_WEBHOOK_URL: ${SELF_HOSTED_WEBHOOK_URL}
+      LOGGING_LEVEL: ${LOGGING_LEVEL}
+      FLY_PROCESS_GROUP: app
+    depends_on:
+      - redis
+      - playwright-service
+    ports:
+      - &quot;3002:3002&quot;
+    command: [ &quot;pnpm&quot;, &quot;run&quot;, &quot;start:production&quot; ]
+
+  worker:
+    &lt;&lt;: *common-service
+    environment:
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      REDIS_RATE_LIMIT_URL: ${REDIS_URL:-redis://redis:6379}
+      PLAYWRIGHT_MICROSERVICE_URL: ${PLAYWRIGHT_MICROSERVICE_URL:-http://playwright-service:3000}
+      USE_DB_AUTHENTICATION: ${USE_DB_AUTHENTICATION}
+      PORT: ${PORT:-3002}
+      NUM_WORKERS_PER_QUEUE: ${NUM_WORKERS_PER_QUEUE}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+      MODEL_NAME: ${MODEL_NAME:-gpt-4o}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+      LLAMAPARSE_API_KEY: ${LLAMAPARSE_API_KEY}
+      LOGTAIL_KEY: ${LOGTAIL_KEY}
+      BULL_AUTH_KEY: ${BULL_AUTH_KEY}
+      TEST_API_KEY: ${TEST_API_KEY}
+      POSTHOG_API_KEY: ${POSTHOG_API_KEY}
+      POSTHOG_HOST: ${POSTHOG_HOST}
+      SUPABASE_ANON_TOKEN: ${SUPABASE_ANON_TOKEN}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_TOKEN: ${SUPABASE_SERVICE_TOKEN}
+      SCRAPING_BEE_API_KEY: ${SCRAPING_BEE_API_KEY}
+      HOST: ${HOST:-0.0.0.0}
+      SELF_HOSTED_WEBHOOK_URL: ${SELF_HOSTED_WEBHOOK_URL}
+      LOGGING_LEVEL: ${LOGGING_LEVEL}
+      FLY_PROCESS_GROUP: worker
+    depends_on:
+      - redis
+      - playwright-service
+      - api
+    command: [ &quot;pnpm&quot;, &quot;run&quot;, &quot;workers&quot; ]
+
+  redis:
+    image: redis:alpine
+    networks:
+      - backend
+    command: redis-server --bind 0.0.0.0
+
+networks:
+  backend:
+    driver: bridge
+</code></pre>
+<ol start="3">
+<li>添加环境变量文件</li>
+</ol>
+<ul>
+<li>内网环境酌情配置 <code>PROXY_SERVER</code> 代理访问</li>
+</ul>
+<pre><code class="language-txt"># ===== Required ENVS ======
+NUM_WORKERS_PER_QUEUE=8 
+PORT=3002
+HOST=0.0.0.0
+REDIS_URL=redis://redis:6379 #for self-hosting using docker, use redis://redis:6379. For running locally, use redis://localhost:6379
+REDIS_RATE_LIMIT_URL=redis://redis:6379 #for self-hosting using docker, use redis://redis:6379. For running locally, use redis://localhost:6379
+PLAYWRIGHT_MICROSERVICE_URL=http://172.28.214.245:3003/scrape
+
+## To turn on DB authentication, you need to set up supabase.
+USE_DB_AUTHENTICATION=false
+
+# ===== Optional ENVS ======
+
+# Supabase Setup (used to support DB authentication, advanced logging, etc.)
+SUPABASE_ANON_TOKEN= 
+SUPABASE_URL= 
+SUPABASE_SERVICE_TOKEN=
+
+# Other Optionals
+# use if you've set up authentication and want to test with a real API key
+TEST_API_KEY=
+# set if you'd like to test the scraping rate limit
+RATE_LIMIT_TEST_API_KEY_SCRAPE=
+# set if you'd like to test the crawling rate limit
+RATE_LIMIT_TEST_API_KEY_CRAWL=
+# set if you'd like to use scraping Be to handle JS blocking
+SCRAPING_BEE_API_KEY=
+# add for LLM dependednt features (image alt generation, etc.)
+OPENAI_API_KEY=
+BULL_AUTH_KEY=@
+# use if you're configuring basic logging with logtail
+LOGTAIL_KEY=
+# set if you have a llamaparse key you'd like to use to parse pdfs
+LLAMAPARSE_API_KEY=
+# set if you'd like to send slack server health status messages
+SLACK_WEBHOOK_URL=
+# set if you'd like to send posthog events like job logs
+POSTHOG_API_KEY=
+# set if you'd like to send posthog events like job logs
+POSTHOG_HOST=
+
+STRIPE_PRICE_ID_STANDARD=
+STRIPE_PRICE_ID_SCALE=
+STRIPE_PRICE_ID_STARTER=
+STRIPE_PRICE_ID_HOBBY=
+STRIPE_PRICE_ID_HOBBY_YEARLY=
+STRIPE_PRICE_ID_STANDARD_NEW=
+STRIPE_PRICE_ID_STANDARD_NEW_YEARLY=
+STRIPE_PRICE_ID_GROWTH=
+STRIPE_PRICE_ID_GROWTH_YEARLY=
+
+HYPERDX_API_KEY=
+HDX_NODE_BETA_MODE=1
+
+# set if you'd like to use the fire engine closed beta
+FIRE_ENGINE_BETA_URL=
+
+# Proxy Settings for Playwright (Alternative you can can use a proxy service like oxylabs, which rotates IPs for you on every request)
+PROXY_SERVER=
+PROXY_USERNAME=
+PROXY_PASSWORD=
+# set if you'd like to block media requests to save proxy bandwidth
+BLOCK_MEDIA=
+
+# Set this to the URL of your webhook when using the self-hosted version of FireCrawl
+SELF_HOSTED_WEBHOOK_URL=
+
+# Resend API Key for transactional emails
+RESEND_API_KEY=
+
+# LOGGING_LEVEL determines the verbosity of logs that the system will output.
+# Available levels are:
+# NONE - No logs will be output.
+# ERROR - For logging error messages that indicate a failure in a specific operation.
+# WARN - For logging potentially harmful situations that are not necessarily errors.
+# INFO - For logging informational messages that highlight the progress of the application.
+# DEBUG - For logging detailed information on the flow through the system, primarily used for debugging.
+# TRACE - For logging more detailed information than the DEBUG level.
+# Set LOGGING_LEVEL to one of the above options to control logging output.
+LOGGING_LEVEL=DEBUG
+</code></pre>
+<h3 id="数据库-mysql">[数据库] Mysql</h3>
+<pre><code class="language-yml"># apps/mysql/docker-compose.yml
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: xxx_PASSWORD
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mysql/confs:/etc/mysql
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mysql/logs:/var/log/mysql
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mysql/data:/var/lib/mysql
+    ports:
+      - 3306:3306
+</code></pre>
+<h3 id="数据库-mongodb">[数据库] MongoDB</h3>
+<pre><code class="language-yml"># apps/mongo/docker-compose.yml
+services:
+  mongo:
+    image: 'mongo:7.0.5'
+    ports:
+      - 27017:27017
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/mongo:/var/lib/mongodb/data
+
+  mongo-express:
+    image: 'mongo-express:1.0.2'
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+</code></pre>
+<h3 id="数据库-milvus">[数据库] Milvus</h3>
+<pre><code class="language-yml"># apps/milvus/docker-compose.yml
+services:
+  etcd:
+    container_name: milvus-etcd
+    restart: always
+    image: quay.io/coreos/etcd:v3.5.14
+    environment:
+      - ETCD_AUTO_COMPACTION_MODE=revision
+      - ETCD_AUTO_COMPACTION_RETENTION=1000
+      - ETCD_QUOTA_BACKEND_BYTES=4294967296
+      - ETCD_SNAPSHOT_COUNT=50000
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/etcd:/etcd
+    command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;etcdctl&quot;, &quot;endpoint&quot;, &quot;health&quot;]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  minio:
+    container_name: milvus-minio
+    restart: always
+    image: minio/minio:RELEASE.2023-03-20T20-16-18Z
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - &quot;9001:9001&quot;
+      - &quot;19000:9000&quot;
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
+    command: minio server /minio_data --console-address &quot;:9001&quot;
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;curl&quot;, &quot;-f&quot;, &quot;http://localhost:9000/minio/health/live&quot;]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  standalone:
+    container_name: milvus-standalone
+    image: milvusdb/milvus:v2.4.11
+    command: [&quot;milvus&quot;, &quot;run&quot;, &quot;standalone&quot;]
+    security_opt:
+    - seccomp:unconfined
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;curl&quot;, &quot;-f&quot;, &quot;http://localhost:9091/healthz&quot;]
+      interval: 30s
+      start_period: 90s
+      timeout: 20s
+      retries: 3
+    ports:
+      - &quot;19530:19530&quot;
+      - &quot;9091:9091&quot;
+    depends_on:
+      - &quot;etcd&quot;
+      - &quot;minio&quot;
+  attu:
+    container_name: attu
+    image: zilliz/attu:latest
+    environment:
+      MILVUS_URL: milvus-standalone:19530
+    ports:
+      - &quot;9002:3000&quot;
+    depends_on:
+      - &quot;standalone&quot;
+
+networks:
+  default:
+    name: milvus
+</code></pre>
+<h3 id="数据库-neo4j">[数据库] Neo4j</h3>
+<pre><code class="language-yml"># apps/neo4j/docker-compose.yml
+services:
+  neo4j:
+    image: neo4j:4.4.38
+    restart: always
+    environment:
+      - NEO4J_AUTH=neo4j/neo4j_passowrd
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+      - NEO4J_dbms_connector_bolt_listen__address=7688
+      - NEO4J_dbms_connector_bolt_advertised__address=7688
+      - NEO4J_PLUGINS=[&quot;apoc&quot;, &quot;graph-data-science&quot;]
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/neo4j/data:/data
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/neo4j/logs:/logs
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/neo4j/config:/config
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/neo4j/plugins:/plugins
+    ports: 
+      - 7474:7474
+      - 7687:7687
+</code></pre>
+<h3 id="中间件-kafka">[中间件] Kafka</h3>
+<pre><code class="language-yml"># apps/kafka/docker-compose.yml
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    restart: always
+    ports:
+      - 2181:2181
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: &quot;yes&quot;
+  kafka:
+    image: 'bitnami/kafka:latest'
+    restart: always
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: &quot;yes&quot;
+      KAFKA_ADVERTISED_HOST_NAME: 101.43.207.38                  ## 修改:宿主机IP
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://101.43.207.38:9092    ## 修改:宿主机IP
+      KAFKA_ZOOKEEPER_CONNECT: &quot;101.43.207.38:2181&quot;
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 8888:8080
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=dev_cluster
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=101.43.207.38:9092
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4">常用指令</a></li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E4%B8%80%E8%A7%88">常用配置一览</a>
+<ul>
+<li><a href="#saas-dify">[SAAS] Dify</a></li>
+<li><a href="#saas-umami">[SAAS] Umami</a></li>
+<li><a href="#saas-flowise-ai">[SAAS] Flowise AI</a></li>
+<li><a href="#saas-firecrawl-%E7%88%AC%E8%99%AB">[SAAS] Firecrawl 爬虫</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93-mysql">[数据库] Mysql</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93-mongodb">[数据库] MongoDB</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93-milvus">[数据库] Milvus</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93-neo4j">[数据库] Neo4j</a></li>
+<li><a href="#%E4%B8%AD%E9%97%B4%E4%BB%B6-kafka">[中间件] Kafka</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://youking.vsh.cc/post/turbo-monorepo-buffet/">
+              <h3 class="post-title">
+                基于 trubo、pnpm、nextjs、tsup 的 monorepo 放题
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'Ov23li7h6TuNCIKHdDPu',
+    clientSecret: '962bb5f5eb453ac33972d5f314fc3706e54b4c9c',
+    repo: 'youking-lib.github.io',
+    owner: 'youking-lib',
+    admin: ['youking-lib'],
+    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://youking.vsh.cc/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.highlightAll()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
